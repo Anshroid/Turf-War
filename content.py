@@ -1,16 +1,21 @@
 from pathlib import Path
-from typing import TypedDict
-import xml.etree.ElementTree as ET
+from shutil import which
+import subprocess
+from typing import TYPE_CHECKING, TypedDict
+from xml.etree import ElementTree
 from copy import deepcopy
 from dataclasses import dataclass
 from random import Random
 
 import json
 
-import resvg_py
+RSVG_PATH = which("rsvg-convert")
+if RSVG_PATH is None or TYPE_CHECKING:
+    print("WARNING: librsvg could not be found, falling back to resvg (8x slower)")
+    import resvg_py
 
 from util import OwnedBy
-from config import MAP_COLOURS
+from config import HIGHLIGHT_COLOUR, MAP_COLOURS, MAP_COLOURS_DARK
 
 ChallengeDict = TypedDict("ChallengeDict", {"title": str, "description": str})
 @dataclass
@@ -21,10 +26,12 @@ class Challenge:
 MapRegionDict = TypedDict("MapRegionDict", {"name": str, "svg_id": str, "default_state": int, "adjacent": list[int]})
 @dataclass
 class MapRegion:
+    idx: int
     name: str
     svg_id: str
     claim: OwnedBy
     adjacent: list[MapRegion]
+    home: bool
     locked: bool = False
     challenge: Challenge | None = None
 
@@ -41,20 +48,20 @@ class ChallengeDeck:
 class GameMap:
     def __init__(self, map_path: Path = Path() / "content" / "maps" / "oxford_city_centre") -> None:
         with open(map_path / "map.svg", "r") as f:
-            self._svg = ET.parse(f)
+            self._svg = ElementTree.parse(f)
         
-        for team, team_home in [(OwnedBy.RED, OwnedBy.RED_HOME), (OwnedBy.YELLOW, OwnedBy.YELLOW_HOME)]:
+        for team in [OwnedBy.RED, OwnedBy.YELLOW]:
             gradient = self._svg.find(f".//*[@id='{team.name}-locked']")
             assert gradient is not None
             stops = gradient.findall(".//*")
             
             stops[0].set("stop-color", MAP_COLOURS[team])
-            stops[1].set("stop-color", MAP_COLOURS[team_home])
+            stops[1].set("stop-color", MAP_COLOURS_DARK[team])
         
         with open(map_path / "map.json", "r") as f:
             region_dicts: list[MapRegionDict] = json.load(f)
             
-        self.regions = [MapRegion(r["name"], r["svg_id"], OwnedBy(r["default_state"]), []) for r in region_dicts]
+        self.regions = [MapRegion(i, r["name"], r["svg_id"], OwnedBy(r["default_state"]), [], r["default_state"] != 2) for i, r in enumerate(region_dicts)]
         for region, region_dict in zip(self.regions, region_dicts):
             region.adjacent = [self.regions[i] for i in region_dict["adjacent"]]
         
@@ -67,18 +74,34 @@ class GameMap:
         for region in self.regions:
             assert self._svg.find(f".//*[@id='{region.svg_id}']") is not None
         
-    def render(self) -> bytes:
+    def render(self, *, highlight: int | None = None) -> bytes:
         svg = deepcopy(self._svg)
         root = svg.getroot()
         for region in self.regions:
             element = root.find(f".//*[@id='{region.svg_id}']")
             assert element is not None
             
-            colour = MAP_COLOURS[region.claim]
-            style = "stroke: #000; stroke-width: 0.2px;"
-            style += f'fill: {f'url(#{region.claim.name}-locked)' if region.locked else colour};'
+            highlighted = highlight == region.idx
+            
+            claim = region.claim
+            colour = MAP_COLOURS[claim] if not region.home else MAP_COLOURS_DARK[claim]
+            
+            if highlighted:
+                style = f"stroke-width: 1.5px; stroke: {HIGHLIGHT_COLOUR};"
+            else:
+                style = "stroke-width: 0.2px; stroke: #000;"
+            style += f'fill: {f'url(#{claim.name}-locked)' if region.locked else colour};'
             
             element.set("style", style)
             
-        return resvg_py.svg_to_bytes(ET.tostring(root, encoding="unicode"), width=2000, height=2000)
+            # fix to display highlight border over other elements (z-index in SVGs is by document order, so effectively duplicate the element at the bottom)
+            if highlighted: 
+                highlight_container = root.find(".//*[@id='highlight-container']")
+                assert highlight_container is not None
+                highlight_container.append(ElementTree.Element("use", {"href": "#" + region.svg_id}))
+        
+        if RSVG_PATH is not None:
+            return subprocess.run([RSVG_PATH, "-w", "2000", "-f", "png", "-", ElementTree.tostring(root, encoding="unicode")], stdout=subprocess.PIPE).stdout
+        else:
+            return resvg_py.svg_to_bytes(ElementTree.tostring(root, encoding="unicode"), width=2000)
         

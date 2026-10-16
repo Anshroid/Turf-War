@@ -12,7 +12,7 @@
 >
   <defs>
     <style type="text/css">
-      *{stroke-linejoin: round; stroke-linecap: butt}
+      *{stroke-linejoin: round; stroke-linecap: round}
     </style>
     <linearGradient id="RED-locked" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
       <stop offset="50%" stop-color="#000" />
@@ -1621,15 +1621,12 @@ L 443.259505 225.053062
 "
       />
     </g>
-    <g id="PathCollection_1">
-      <g>
-        <circle cx="88.836495" cy="160.136611" r="2" style="fill: #0000; stroke: #0f0"/>
-      </g>
+    <g id="highlight-container" />
+    <g>
+      <circle cx="88.836495" cy="160.136611" r="2" style="fill: #0000; stroke: #00f"/>
     </g>
-    <g id="PathCollection_2">
-      <g>
-        <circle cx="400.413264" cy="131.116166" r="2" style="fill: #0000; stroke: #0f0"/>
-      </g>
+    <g>
+      <circle cx="400.413264" cy="131.116166" r="2" style="fill: #0000; stroke: #00f"/>
     </g>
   </g>
 </svg>

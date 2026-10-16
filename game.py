@@ -21,19 +21,20 @@ class TurfWar(GameContext):
         return True
     
     @event()
-    def claim_region(self, team_id: int, region_id: int) -> None:        
+    def claim_region(self, team_id: int, region_id: int) -> bool:        
         region = self.map.regions[region_id]
         own = [OwnedBy.RED, OwnedBy.YELLOW][team_id]
         
-        if region.locked or region.claim in [OwnedBy.YELLOW_HOME, OwnedBy.RED_HOME, own]:
-            return
+        if region.locked or region.home or region.claim == own:
+            return False
         
-        # note: do not enforce neighbour checks! these should purposefully be overrideable.
-        # if not any(neighbour.claim == own for neighbour in region.adjacent):
-        #     return
+        if not any(neighbour.claim == own for neighbour in region.adjacent):
+            return False
     
         region.claim = own
         region.locked = True
+        
+        return True
         
     @event()
     def end_cycle(self) -> None:

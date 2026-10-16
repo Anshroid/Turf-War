@@ -1,723 +1,723 @@
 [
     {
         "id": 0,
-        "name": "0 Bus Station",
+        "name": "(0) Bus Station",
         "svg_id": "patch_3",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [1, 2]
     },
     {
         "id": 1,
-        "name": "1 Gloucester Green",
+        "name": "(1) Gloucester Green",
         "svg_id": "patch_4",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [0, 2, 32]
     },
     {
         "id": 2,
-        "name": "2 George St W",
+        "name": "(2) George St W",
         "svg_id": "patch_5",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [0, 1, 3, 4, 33, 34]
     },
     {
         "id": 3,
-        "name": "3 Bulwarks Ln",
+        "name": "(3) Bulwarks Ln",
         "svg_id": "patch_6",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [2, 5, 10]
     },
     {
         "id": 4,
-        "name": "4 Worcester St",
+        "name": "(4) Worcester St",
         "svg_id": "patch_7",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [2, 5, 6, 7]
     },
     {
         "id": 5,
-        "name": "5 George St Mews",
+        "name": "(5) George St Mews",
         "svg_id": "patch_8",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [3, 4]
     },
     {
         "id": 6,
-        "name": "6 Tidmarsh Ln",
+        "name": "(6) Tidmarsh Ln",
         "svg_id": "patch_9",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [4, 8]
     },
     {
         "id": 7,
-        "name": "7 New Rd W",
+        "name": "(7) New Rd W",
         "svg_id": "patch_10",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [4, 9, 10]
     },
     {
         "id": 8,
-        "name": "8 Oxford Castle W",
+        "name": "(8) Oxford Castle W",
         "svg_id": "patch_11",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [6, 9, 11]
     },
     {
         "id": 9,
-        "name": "9 Oxford Castle N",
+        "name": "(9) Oxford Castle N",
         "svg_id": "patch_12",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [7, 8, 10, 12]
     },
     {
         "id": 10,
-        "name": "10 New Rd E",
+        "name": "(10) New Rd E",
         "svg_id": "patch_13",
-        "default_state": 1,
+        "default_state": 0,
         "adjacent": [3, 7, 9, 13, 36]
     },
     {
         "id": 11,
-        "name": "11 Oxford Castle S",
+        "name": "(11) Oxford Castle S",
         "svg_id": "patch_14",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [8, 12, 14]
     },
     {
         "id": 12,
-        "name": "12 Oxford Castle E",
+        "name": "(12) Oxford Castle E",
         "svg_id": "patch_15",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [9, 11, 13]
     },
     {
         "id": 13,
-        "name": "13 Castle St N",
+        "name": "(13) Castle St N",
         "svg_id": "patch_16",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [10, 12, 14, 16, 19]
     },
     {
         "id": 14,
-        "name": "14 Paradise St",
+        "name": "(14) Paradise St",
         "svg_id": "patch_17",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [11, 13, 15]
     },
     {
         "id": 15,
-        "name": "15 Paradise Sq",
+        "name": "(15) Paradise Sq",
         "svg_id": "patch_18",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [14, 16, 17]
     },
     {
         "id": 16,
-        "name": "16 Norfolk St N",
+        "name": "(16) Norfolk St N",
         "svg_id": "patch_19",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [13, 15, 17, 20, 23]
     },
     {
         "id": 17,
-        "name": "17 Norfolk St S",
+        "name": "(17) Norfolk St S",
         "svg_id": "patch_20",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [15, 16, 24]
     },
     {
         "id": 18,
-        "name": "18 Westgate N Ave",
+        "name": "(18) Westgate N Ave",
         "svg_id": "patch_21",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [19, 20, 22]
     },
     {
         "id": 19,
-        "name": "19 Westgate S Arcade W",
+        "name": "(19) Westgate S Arcade W",
         "svg_id": "patch_22",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [13, 18, 23]
     },
     {
         "id": 20,
-        "name": "20 Westgate Middle Sq",
+        "name": "(20) Westgate Middle Sq",
         "svg_id": "patch_23",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [16, 18, 21, 26]
     },
     {
         "id": 21,
-        "name": "21 Westgate S Arcade LG",
+        "name": "(21) Westgate S Arcade LG",
         "svg_id": "patch_24",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [20, 23]
     },
     {
         "id": 22,
-        "name": "22 Westgate S Arcade E",
+        "name": "(22) Westgate S Arcade E",
         "svg_id": "patch_25",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [18, 25, 23]
     },
     {
         "id": 23,
-        "name": "23 Westgate Leiden Sq",
+        "name": "(23) Westgate Leiden Sq",
         "svg_id": "patch_26",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [16, 19, 21, 22, 24, 27]
     },
     {
         "id": 24,
-        "name": "24 Speedwell St W",
+        "name": "(24) Speedwell St W",
         "svg_id": "patch_27",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [17, 23, 27, 46]
     },
     {
         "id": 25,
-        "name": "25 Penny Farthing Pl",
+        "name": "(25) Penny Farthing Pl",
         "svg_id": "patch_28",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [22, 26, 39]
     },
     {
         "id": 26,
-        "name": "26 Turn Again Ln",
+        "name": "(26) Turn Again Ln",
         "svg_id": "patch_29",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": [20, 27, 28, 39, 43]
     },
     {
         "id": 27,
-        "name": "27 Old Greyfriars St",
+        "name": "(27) Old Greyfriars St",
         "svg_id": "patch_30",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 28,
-        "name": "28 Pike Terrace",
+        "name": "(28) Pike Terrace",
         "svg_id": "patch_31",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 29,
-        "name": "29 Faulkner St",
+        "name": "(29) Faulkner St",
         "svg_id": "patch_32",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 30,
-        "name": "30 Beaumont St E",
+        "name": "(30) Beaumont St E",
         "svg_id": "patch_33",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 31,
-        "name": "31 Friars Entry",
+        "name": "(31) Friars Entry",
         "svg_id": "patch_34",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 32,
-        "name": "32 Gloucester St",
+        "name": "(32) Gloucester St",
         "svg_id": "patch_35",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 33,
-        "name": "33 George St E",
+        "name": "(33) George St E",
         "svg_id": "patch_36",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 34,
-        "name": "34 New Inn Hall St",
+        "name": "(34) New Inn Hall St",
         "svg_id": "patch_37",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 35,
-        "name": "35 St Michael's St",
+        "name": "(35) St Michael's St",
         "svg_id": "patch_38",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 36,
-        "name": "36 Bonn Sq",
+        "name": "(36) Bonn Sq",
         "svg_id": "patch_39",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 37,
-        "name": "37 Queen St",
+        "name": "(37) Queen St",
         "svg_id": "patch_40",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 38,
-        "name": "38 St Ebbe's St N",
+        "name": "(38) St Ebbe's St N",
         "svg_id": "patch_41",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 39,
-        "name": "39 St Ebbe's St S",
+        "name": "(39) St Ebbe's St S",
         "svg_id": "patch_42",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 40,
-        "name": "40 Pembroke St",
+        "name": "(40) Pembroke St",
         "svg_id": "patch_43",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 41,
-        "name": "41 Pembroke Sq",
+        "name": "(41) Pembroke Sq",
         "svg_id": "patch_44",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 42,
-        "name": "42 Brewer St",
+        "name": "(42) Brewer St",
         "svg_id": "patch_45",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 43,
-        "name": "43 Littlegate St",
+        "name": "(43) Littlegate St",
         "svg_id": "patch_46",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 44,
-        "name": "44 Rose Pl",
+        "name": "(44) Rose Pl",
         "svg_id": "patch_47",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 45,
-        "name": "45 Albion Pl",
+        "name": "(45) Albion Pl",
         "svg_id": "patch_48",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 46,
-        "name": "46 Speedwell St E",
+        "name": "(46) Speedwell St E",
         "svg_id": "patch_49",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 47,
-        "name": "47 Magdalen Street",
+        "name": "(47) Magdalen Street",
         "svg_id": "patch_50",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 48,
-        "name": "48 Magdalen St E",
+        "name": "(48) Magdalen St E",
         "svg_id": "patch_51",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 49,
-        "name": "49 Cornmarket N",
+        "name": "(49) Cornmarket N",
         "svg_id": "patch_52",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 50,
-        "name": "50 Cornmarket C",
+        "name": "(50) Cornmarket C",
         "svg_id": "patch_53",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 51,
-        "name": "51 Cornmarket S",
+        "name": "(51) Cornmarket S",
         "svg_id": "patch_54",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 52,
-        "name": "52 St Aldate's N",
+        "name": "(52) St Aldate's N",
         "svg_id": "patch_55",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 53,
-        "name": "53 St Aldates C",
+        "name": "(53) St Aldates C",
         "svg_id": "patch_56",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 54,
-        "name": "54 St Aldate's S",
+        "name": "(54) St Aldate's S",
         "svg_id": "patch_57",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 55,
-        "name": "55 Broad St W",
+        "name": "(55) Broad St W",
         "svg_id": "patch_58",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 56,
-        "name": "56 Ship St",
+        "name": "(56) Ship St",
         "svg_id": "patch_59",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 57,
-        "name": "57 Market St",
+        "name": "(57) Market St",
         "svg_id": "patch_60",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 58,
-        "name": "58 Golden Cross",
+        "name": "(58) Golden Cross",
         "svg_id": "patch_61",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 59,
-        "name": "59 Covered Market N",
+        "name": "(59) Covered Market N",
         "svg_id": "patch_62",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 60,
-        "name": "60 Covered Market S",
+        "name": "(60) Covered Market S",
         "svg_id": "patch_63",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 61,
-        "name": "61 High St W",
+        "name": "(61) High St W",
         "svg_id": "patch_64",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 62,
-        "name": "62 Blue Boar St",
+        "name": "(62) Blue Boar St",
         "svg_id": "patch_65",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 63,
-        "name": "63 Turl St N",
+        "name": "(63) Turl St N",
         "svg_id": "patch_66",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 64,
-        "name": "64 Turl St S",
+        "name": "(64) Turl St S",
         "svg_id": "patch_67",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 65,
-        "name": "65 Bear Ln",
+        "name": "(65) Bear Ln",
         "svg_id": "patch_68",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 66,
-        "name": "66 Broad Street E",
+        "name": "(66) Broad Street E",
         "svg_id": "patch_69",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 67,
-        "name": "67 Sheldonian Theatre",
+        "name": "(67) Sheldonian Theatre",
         "svg_id": "patch_70",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 68,
-        "name": "68 Clarendon Building",
+        "name": "(68) Clarendon Building",
         "svg_id": "patch_71",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 69,
-        "name": "69 Bodleian Library",
+        "name": "(69) Bodleian Library",
         "svg_id": "patch_72",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 70,
-        "name": "70 Brasenose Ln",
+        "name": "(70) Brasenose Ln",
         "svg_id": "patch_73",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 71,
-        "name": "71 Radcliffe Sq N",
+        "name": "(71) Radcliffe Sq N",
         "svg_id": "patch_74",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 72,
-        "name": "72 Radcliffe Sq S",
+        "name": "(72) Radcliffe Sq S",
         "svg_id": "patch_75",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 73,
-        "name": "73 High St WC",
+        "name": "(73) High St WC",
         "svg_id": "patch_76",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 74,
-        "name": "74 King Edward St",
+        "name": "(74) King Edward St",
         "svg_id": "patch_77",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 75,
-        "name": "75 Oriel St",
+        "name": "(75) Oriel St",
         "svg_id": "patch_78",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 76,
-        "name": "76 Oriel Sq",
+        "name": "(76) Oriel Sq",
         "svg_id": "patch_79",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 77,
-        "name": "77 Broad Walk W",
+        "name": "(77) Broad Walk W",
         "svg_id": "patch_80",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 78,
-        "name": "78 Broad Walk C",
+        "name": "(78) Broad Walk C",
         "svg_id": "patch_81",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 79,
-        "name": "79 Catte Street N",
+        "name": "(79) Catte Street N",
         "svg_id": "patch_82",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 80,
-        "name": "80 Catte Street NC",
+        "name": "(80) Catte Street NC",
         "svg_id": "patch_83",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 81,
-        "name": "81 Catte St S",
+        "name": "(81) Catte St S",
         "svg_id": "patch_84",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 82,
-        "name": "82 Magpie Ln",
+        "name": "(82) Magpie Ln",
         "svg_id": "patch_85",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 83,
-        "name": "83 Merton St W",
+        "name": "(83) Merton St W",
         "svg_id": "patch_86",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 84,
-        "name": "84 Grove Walk",
+        "name": "(84) Grove Walk",
         "svg_id": "patch_87",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 85,
-        "name": "85 Holywell St W",
+        "name": "(85) Holywell St W",
         "svg_id": "patch_88",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 86,
-        "name": "86 Holywell St E",
+        "name": "(86) Holywell St E",
         "svg_id": "patch_89",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 87,
-        "name": "87 Bath Pl",
+        "name": "(87) Bath Pl",
         "svg_id": "patch_90",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 88,
-        "name": "88 New College Ln",
+        "name": "(88) New College Ln",
         "svg_id": "patch_91",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 89,
-        "name": "89 Queen's Ln N",
+        "name": "(89) Queen's Ln N",
         "svg_id": "patch_92",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 90,
-        "name": "90 Queen's Ln S",
+        "name": "(90) Queen's Ln S",
         "svg_id": "patch_93",
-        "default_state": 3,
+        "default_state": 1,
         "adjacent": []
     },
     {
         "id": 91,
-        "name": "91 High St C",
+        "name": "(91) High St C",
         "svg_id": "patch_94",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 92,
-        "name": "92 High St EC",
+        "name": "(92) High St EC",
         "svg_id": "patch_95",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 93,
-        "name": "93 Logic Ln",
+        "name": "(93) Logic Ln",
         "svg_id": "patch_96",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 94,
-        "name": "94 Merton St E",
+        "name": "(94) Merton St E",
         "svg_id": "patch_97",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 95,
-        "name": "95 Deadman's Walk",
+        "name": "(95) Deadman's Walk",
         "svg_id": "patch_98",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 96,
-        "name": "96 Broad Walk NE",
+        "name": "(96) Broad Walk NE",
         "svg_id": "patch_99",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 97,
-        "name": "97 Broad Walk E",
+        "name": "(97) Broad Walk E",
         "svg_id": "patch_100",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 98,
-        "name": "98 Longwall St N",
+        "name": "(98) Longwall St N",
         "svg_id": "patch_101",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 99,
-        "name": "99 Longwall St S",
+        "name": "(99) Longwall St S",
         "svg_id": "patch_102",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 100,
-        "name": "100 High St E",
+        "name": "(100) High St E",
         "svg_id": "patch_103",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 101,
-        "name": "101 Rose Ln",
+        "name": "(101) Rose Ln",
         "svg_id": "patch_104",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     },
     {
         "id": 102,
-        "name": "102 Meadow Walk",
+        "name": "(102) Meadow Walk",
         "svg_id": "patch_105",
-        "default_state": 4,
+        "default_state": 2,
         "adjacent": []
     }
 ]
