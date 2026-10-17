@@ -4,7 +4,7 @@ import subprocess
 from typing import TYPE_CHECKING, TypedDict
 from xml.etree import ElementTree
 from copy import deepcopy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from random import Random
 
 import json
@@ -30,7 +30,7 @@ class MapRegion:
     name: str
     svg_id: str
     claim: OwnedBy
-    adjacent: set[MapRegion]
+    adjacent: set[MapRegion] = field(repr=False)
     home: bool
     locked: bool = False
     challenge: Challenge | None = None

@@ -21,10 +21,6 @@ bot = JLOXBot(TurfWar, pathlib.Path() / "save", member_hostable=False, joinable=
 async def on_ready():
     bot.logger.info(f"{bot.user} is online!")
 
-@bot.command()
-async def hi(dctx: ApplicationContext, p: str):
-    pass
-
 @bot.game_command()
 async def map(dctx: ApplicationContext, gctx: TurfWar):
     """Get the current game map!"""
@@ -33,6 +29,7 @@ async def map(dctx: ApplicationContext, gctx: TurfWar):
 
 @bot.game_management_group.game_command()
 async def start(dctx: ApplicationContext, gctx: TurfWar):
+    """Start the game."""
     gctx.start()
     await dctx.respond("Game started!")
 
@@ -140,6 +137,8 @@ async def list_challenges(dctx: ApplicationContext, gctx: TurfWar, show_all: boo
 @option("team", autocomplete=bot.team_autocomplete, parameter_name="team_id")
 @option("region", autocomplete=region_autocomplete, parameter_name="region_id")
 async def claim(dctx: ApplicationContext, gctx: TurfWar, team_id: int, region_id: int, locked: bool = True):
+    """Forcefully set the claimed and locked state of a regions."""
+    
     team = gctx.get_team(team_id)
     if team is None:
         await dctx.respond("Invalid team entered!", ephemeral=True)
@@ -152,7 +151,9 @@ async def claim(dctx: ApplicationContext, gctx: TurfWar, team_id: int, region_id
 @option("region-1", autocomplete=region_autocomplete, parameter_name="region_1_id")
 @option("region-2", autocomplete=region_autocomplete, parameter_name="region_2_id")
 async def connect(dctx: ApplicationContext, gctx: TurfWar, region_1_id: int, region_2_id: int):
+    """Forcefully connect two regions in the map."""
+    
     gctx.force_connect(region_1_id, region_2_id)
-    await dctx.respond(f"Connected {gctx.map.regions[region_1_id]} to {gctx.map.regions[region_2_id]} successfully!", ephemeral=True)
+    await dctx.respond(f"Connected {gctx.map.regions[region_1_id].name} to {gctx.map.regions[region_2_id].name} successfully!", ephemeral=True)
 
 bot.run(TOKEN)
