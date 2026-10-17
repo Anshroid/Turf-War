@@ -154,7 +154,7 @@ async def claim(dctx: ApplicationContext, gctx: TurfWar, team_id: int, region_id
         return
         
     gctx.force_claim(team_id, region_id, locked)
-    await dctx.respond(f"Force claimed {gctx.map.regions[region_id].name} for {team.name}, {not locked * "un"}locked successfully!", ephemeral=True)
+    await dctx.respond(f"Force claimed {gctx.map.regions[region_id].name} for {team.name}, {(not locked) * "un"}locked successfully!", ephemeral=True)
 
 @bot.referee_group.game_command()
 @option("region-1", autocomplete=region_autocomplete, parameter_name="region_1_id")

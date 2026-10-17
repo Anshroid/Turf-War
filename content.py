@@ -61,7 +61,9 @@ class GameMap:
             stops = gradient.findall(".//*")
             
             stops[0].set("stop-color", MAP_COLOURS[team])
-            stops[1].set("stop-color", MAP_COLOURS_DARK[team])
+            stops[1].set("stop-color", MAP_COLOURS[team])
+            stops[2].set("stop-color", MAP_COLOURS_DARK[team])
+            stops[3].set("stop-color", MAP_COLOURS_DARK[team])
         
         with open(map_path / "map.json", "r") as f:
             region_dicts: list[MapRegionDict] = json.load(f)
@@ -115,7 +117,7 @@ class GameMap:
         else:
             output = resvg_py.svg_to_bytes(ElementTree.tostring(root, encoding="unicode"), width=2000)
         
-            getLogger(f"jloxgame.game").info(f"map generation took {time.time()-start_time:.02f}s")
+        getLogger(f"jloxgame.game").info(f"map generation took {time.time()-start_time:.02f}s")
             
         return output
         
