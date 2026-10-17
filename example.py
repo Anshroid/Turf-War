@@ -14,14 +14,15 @@ game = bot.create()
 
 for i in range(10):
     game.end_cycle()
-    with open("out.png", "wb") as f:
-        f.write(game.map.render())
-    input("press enter to continue...")
+    # with open("out.png", "wb") as f:
+    #     f.write(game.map.render())
+    # input("press enter to continue...")
     
-    for i in range(10):
+    for i in range(1000):
         game.claim_region(random.random() > 0.5, random.randint(0, len(game.map.regions)-1))
     
-    with open("out.png", "wb") as f:
-        f.write(game.map.render())
-    input("press enter to continue...")
+    
+    # input("press enter to continue...")
 
+with open("generated_maps/out.png", "wb") as f:
+    f.write(game.map.render())

@@ -15,7 +15,7 @@ if RSVG_PATH is None or TYPE_CHECKING:
     import resvg_py
 
 from util import OwnedBy
-from config import HIGHLIGHT_COLOUR, MAP_COLOURS, MAP_COLOURS_DARK
+from config import HIGHLIGHT_1_COLOUR, HIGHLIGHT_2_COLOUR, MAP_COLOURS, MAP_COLOURS_DARK
 
 ChallengeDict = TypedDict("ChallengeDict", {"title": str, "description": str})
 @dataclass
@@ -30,10 +30,13 @@ class MapRegion:
     name: str
     svg_id: str
     claim: OwnedBy
-    adjacent: list[MapRegion]
+    adjacent: set[MapRegion]
     home: bool
     locked: bool = False
     challenge: Challenge | None = None
+    
+    def __hash__(self) -> int:
+        return hash(self.idx)
 
 class ChallengeDeck:
     def __init__(self, challenges_path: Path = Path() / "content" / "challenges.json") -> None:
@@ -61,9 +64,9 @@ class GameMap:
         with open(map_path / "map.json", "r") as f:
             region_dicts: list[MapRegionDict] = json.load(f)
             
-        self.regions = [MapRegion(i, r["name"], r["svg_id"], OwnedBy(r["default_state"]), [], r["default_state"] != 2) for i, r in enumerate(region_dicts)]
+        self.regions = [MapRegion(i, r["name"], r["svg_id"], OwnedBy(r["default_state"]), set(), r["default_state"] != 2) for i, r in enumerate(region_dicts)]
         for region, region_dict in zip(self.regions, region_dicts):
-            region.adjacent = [self.regions[i] for i in region_dict["adjacent"]]
+            region.adjacent = {self.regions[i] for i in region_dict["adjacent"]}
         
         # assert edge relation symmetry
         # for region in self._regions:
@@ -74,20 +77,23 @@ class GameMap:
         for region in self.regions:
             assert self._svg.find(f".//*[@id='{region.svg_id}']") is not None
         
-    def render(self, *, highlight: int | None = None) -> bytes:
+    def render(self, *, highlight: int | None = None, highlight_neighbours: bool = False) -> bytes:
         svg = deepcopy(self._svg)
         root = svg.getroot()
         for region in self.regions:
             element = root.find(f".//*[@id='{region.svg_id}']")
             assert element is not None
             
-            highlighted = highlight == region.idx
+            highlighted_1 = highlight == region.idx
+            highlighted_2 = highlight is not None and highlight_neighbours and region in self.regions[highlight].adjacent
             
             claim = region.claim
             colour = MAP_COLOURS[claim] if not region.home else MAP_COLOURS_DARK[claim]
             
-            if highlighted:
-                style = f"stroke-width: 1.5px; stroke: {HIGHLIGHT_COLOUR};"
+            if highlighted_1:
+                style = f"stroke-width: 1.5px; stroke: {HIGHLIGHT_1_COLOUR};"
+            elif highlighted_2:
+                style = f"stroke-width: 0.8px; stroke: {HIGHLIGHT_2_COLOUR};"
             else:
                 style = "stroke-width: 0.2px; stroke: #000;"
             style += f'fill: {f'url(#{claim.name}-locked)' if region.locked else colour};'
@@ -95,8 +101,8 @@ class GameMap:
             element.set("style", style)
             
             # fix to display highlight border over other elements (z-index in SVGs is by document order, so effectively duplicate the element at the bottom)
-            if highlighted: 
-                highlight_container = root.find(".//*[@id='highlight-container']")
+            if highlighted_1 or highlighted_2: 
+                highlight_container = root.find(f".//*[@id='highlight-{1 + highlighted_2}-container']")
                 assert highlight_container is not None
                 highlight_container.append(ElementTree.Element("use", {"href": "#" + region.svg_id}))
         

@@ -87,7 +87,7 @@ async def get(dctx: ApplicationContext | Interaction, gctx: TurfWar, region_id: 
     
     challenge_embed = Embed(title=region.challenge.title, description=region.challenge.description)
     
-    map_embed, map_png_path = generate_new_map(gctx, highlight=region_id)
+    map_embed, map_png_path = generate_new_map(gctx, highlight=region_id, highlight_neighbours=True)
     await dctx.respond(
         f"Here is the challenge for {region.name}!\n-# {msg}",
         embeds=[challenge_embed, map_embed], 
@@ -128,12 +128,31 @@ async def list_challenges(dctx: ApplicationContext, gctx: TurfWar, show_all: boo
             
             embed.add_field(name=f"{region.name} - {region.challenge.title}", value=region.challenge.description, inline=False)
         
-        pages.append(Page(embeds=[embed], custom_view=ChallengeListView(gctx, regions[offset:offset+MAX_PAGE_SIZE], get), content="Here are all the challenges!"))
+        pages.append(Page(embeds=[embed], custom_view=ChallengeListView(regions[offset:offset+MAX_PAGE_SIZE], get), content="Here are all the challenges!"))
         
         offset += MAX_PAGE_SIZE
     
     paginator = Paginator(pages)
     
     await paginator.respond(dctx.interaction, ephemeral=True) # pyright: ignore[reportUnknownMemberType]
-    
+
+@bot.referee_group.game_command()
+@option("team", autocomplete=bot.team_autocomplete, parameter_name="team_id")
+@option("region", autocomplete=region_autocomplete, parameter_name="region_id")
+async def claim(dctx: ApplicationContext, gctx: TurfWar, team_id: int, region_id: int, locked: bool = True):
+    team = gctx.get_team(team_id)
+    if team is None:
+        await dctx.respond("Invalid team entered!", ephemeral=True)
+        return
+        
+    gctx.force_claim(team_id, region_id, locked)
+    await dctx.respond(f"Force claimed {gctx.map.regions[region_id].name} for {team.name}, {not locked * "un"}locked successfully!", ephemeral=True)
+
+@bot.referee_group.game_command()
+@option("region-1", autocomplete=region_autocomplete, parameter_name="region_1_id")
+@option("region-2", autocomplete=region_autocomplete, parameter_name="region_2_id")
+async def connect(dctx: ApplicationContext, gctx: TurfWar, region_1_id: int, region_2_id: int):
+    gctx.force_connect(region_1_id, region_2_id)
+    await dctx.respond(f"Connected {gctx.map.regions[region_1_id]} to {gctx.map.regions[region_2_id]} successfully!", ephemeral=True)
+
 bot.run(TOKEN)

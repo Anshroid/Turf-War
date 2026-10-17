@@ -11,8 +11,6 @@ from util import generate_new_map, disable_view
 if TYPE_CHECKING:
     from game import TurfWar
 
-# TODO: singletons
-
 class ClaimView(View):
     def __init__(self, team: Team, gctx: TurfWar, region_id: int, disabled: bool = False):
         super().__init__(timeout=None)
@@ -40,7 +38,7 @@ class ClaimView(View):
             await interaction.respond(f"Something went wrong - the claim is no longer valid!", ephemeral=True)
 
 class ChallengeListView(View):
-    def __init__(self, gctx: TurfWar, regions: list[MapRegion], get_challenge_fn: AsyncCallable[[Interaction, int], None]):
+    def __init__(self, regions: list[MapRegion], get_challenge_fn: AsyncCallable[[Interaction, int], None]):
         super().__init__(timeout=None)
         
         class ChallengeListSelect(Select):

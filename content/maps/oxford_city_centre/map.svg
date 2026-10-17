@@ -1621,7 +1621,8 @@ L 443.259505 225.053062
 "
       />
     </g>
-    <g id="highlight-container" />
+    <g id="highlight-2-container" />
+    <g id="highlight-1-container" />
     <g>
       <circle cx="88.836495" cy="160.136611" r="2" style="fill: #0000; stroke: #00f"/>
     </g>
