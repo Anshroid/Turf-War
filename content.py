@@ -1,6 +1,6 @@
 from pathlib import Path
 from shutil import which
-import subprocess
+from subprocess import Popen, PIPE
 from typing import TYPE_CHECKING, TypedDict
 from xml.etree import ElementTree
 from copy import deepcopy
@@ -107,7 +107,9 @@ class GameMap:
                 highlight_container.append(ElementTree.Element("use", {"href": "#" + region.svg_id}))
         
         if RSVG_PATH is not None:
-            return subprocess.run([RSVG_PATH, "-w", "2000", "-f", "png", "-", ElementTree.tostring(root, encoding="unicode")], stdout=subprocess.PIPE).stdout
+            with Popen([RSVG_PATH, "-w", "2000", "-f", "png"], stdout=PIPE, stdin=PIPE) as p:
+                output = p.communicate(ElementTree.tostring(root))[0]
+            return output
         else:
             return resvg_py.svg_to_bytes(ElementTree.tostring(root, encoding="unicode"), width=2000)
         
