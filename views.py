@@ -1,32 +1,30 @@
-import asyncio
 from typing import TYPE_CHECKING
 
-from discord import ButtonStyle, File, Interaction
-from discord.ui import View, Button, button
+from discord import ButtonStyle, File, Interaction, SelectOption
+from discord.ui import Select, View, Button, button
 
+from content import MapRegion
+from jloxgame.abc import AsyncCallable
 from jloxgame.state import Team
 from util import generate_new_map, disable_view
 
 if TYPE_CHECKING:
     from game import TurfWar
 
-class ConfirmClaimView(View):
-    instances: dict[Team, ConfirmClaimView] = {}
-    
-    def __init__(self, team: Team, gctx: TurfWar, region_id: int):
+# TODO: singletons
+
+class ClaimView(View):
+    def __init__(self, team: Team, gctx: TurfWar, region_id: int, disabled: bool = False):
         super().__init__(timeout=None)
-        
-        if team in ConfirmClaimView.instances:
-            view = ConfirmClaimView.instances[team]
-            asyncio.create_task(disable_view(view))
-        ConfirmClaimView.instances[team] = self
         
         self.team = team
         self.gctx = gctx
         self.region_id = region_id
         
-    @button(label="Confirm!", style=ButtonStyle.green, emoji="🎯")
-    async def confirm(self, button: Button[ConfirmClaimView], interaction: Interaction):
+        if disabled: self.disable_all_items()
+        
+    @button(label="Claim!", style=ButtonStyle.green, emoji="🎯")
+    async def confirm(self, button: Button[ClaimView], interaction: Interaction):
         success = self.gctx.claim_region(self.team.team_id, self.region_id)
         
         if success:
@@ -40,9 +38,18 @@ class ConfirmClaimView(View):
         
         else:
             await interaction.respond(f"Something went wrong - the claim is no longer valid!", ephemeral=True)
-    
-    @button(label="Cancel!", style=ButtonStyle.red, emoji="✖️")
-    async def cancel(self, button: Button[ConfirmClaimView], interaction: Interaction):
-        await interaction.respond("Cancelled the interaction.", ephemeral=True)
+
+class ChallengeListView(View):
+    def __init__(self, gctx: TurfWar, regions: list[MapRegion], get_challenge_fn: AsyncCallable[[Interaction, int], None]):
+        super().__init__(timeout=None)
         
-        await disable_view(self)
+        class ChallengeListSelect(Select):
+            async def callback(self, interaction: Interaction):
+                if not self.values: return
+                
+                region_id = int(self.values[0])
+                
+                await get_challenge_fn(interaction, region_id)
+            
+        self.add_item(ChallengeListSelect(options = [SelectOption(label=region.name, value=str(region.idx)) for region in regions], placeholder = "Select a region to claim..."))
+        
