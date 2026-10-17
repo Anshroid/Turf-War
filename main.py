@@ -5,7 +5,7 @@ from config import MAX_PAGE_SIZE
 from jloxgame import JLOXBot
 
 from game import TurfWar
-from util import generate_new_map, choices, OwnedBy
+from util import Status, generate_new_map, choices, OwnedBy
 
 from discord import ApplicationContext, Embed, File, Interaction, option, AutocompleteContext, OptionChoice, Member # pyright: ignore[reportUnknownVariableType]
 from discord.ext.pages import Page, Paginator # pyright: ignore[reportMissingTypeStubs]
@@ -55,31 +55,40 @@ async def get(dctx: ApplicationContext | Interaction, gctx: TurfWar, region_id: 
     
     assert isinstance(dctx.user, Member)
     team = gctx.get_user_team(dctx.user)
+    
+    if not (0 <= region_id < len(gctx.map.regions)):
+        await dctx.respond("Invalid region entered!", ephemeral=True)
+        return
+        
     region = gctx.map.regions[region_id]
     
     msg = "If you want to claim this region, make sure it's the right one!"
     claimable = True
     
     if team is None:
-        msg = f"You are not in any team in this game!"
+        msg = f"You are not in this game!"
         claimable = False
     else:
         own = [OwnedBy.RED, OwnedBy.YELLOW][team.team_id]
         
-        if region.home:
-            msg = f"{region.name} is a team's base and cannot be claimed!"
+        if gctx.status != Status.RUNNING:
+            msg = f"The game has ended!"
             claimable = False
-            
+        
         elif region.claim == own:
             msg = f"Your team already owns {region.name}!"
             claimable = False
             
+        elif region.home:
+            msg = f"{region.name} is the other team's base and cannot be claimed!"
+            claimable = False
+        
         elif not any(neighbour.claim == own for neighbour in region.adjacent):
             msg = f"{region.name} is not adjacent to any of your team's owned regions. Ask a referee if you think this is incorrect."
             claimable = False
     
     if region.challenge is None:
-        await dctx.respond("Something went wrong - challenges have not been generated yet!", ephemeral=True)
+        await dctx.respond("Challenges have not been generated yet!", ephemeral=True)
         return
     
     challenge_embed = Embed(title=region.challenge.title, description=region.challenge.description)
@@ -94,7 +103,7 @@ async def get(dctx: ApplicationContext | Interaction, gctx: TurfWar, region_id: 
     )
 
 @challenge_group.game_command(name="list")
-async def list_challenges(dctx: ApplicationContext, gctx: TurfWar, show_all: bool = False):
+async def list_challenges(dctx: ApplicationContext, gctx: TurfWar):
     """List the challenges for all regions!"""
     
     pages: list[Page] = []
@@ -120,7 +129,7 @@ async def list_challenges(dctx: ApplicationContext, gctx: TurfWar, show_all: boo
             if region.home: continue
             
             if region.challenge is None:
-                await dctx.respond("Something went wrong - challenges have not been generated yet!", ephemeral=True)
+                await dctx.respond("Challenges have not been generated yet!", ephemeral=True)
                 return
             
             embed.add_field(name=f"{region.name} - {region.challenge.title}", value=region.challenge.description, inline=False)
@@ -152,6 +161,14 @@ async def claim(dctx: ApplicationContext, gctx: TurfWar, team_id: int, region_id
 @option("region-2", autocomplete=region_autocomplete, parameter_name="region_2_id")
 async def connect(dctx: ApplicationContext, gctx: TurfWar, region_1_id: int, region_2_id: int):
     """Forcefully connect two regions in the map."""
+    
+    if not (0 <= region_1_id < len(gctx.map.regions)):
+        await dctx.respond("Invalid region 1 entered!", ephemeral=True)
+        return
+    
+    if not (0 <= region_2_id < len(gctx.map.regions)):
+        await dctx.respond("Invalid region 2 entered!", ephemeral=True)
+        return
     
     gctx.force_connect(region_1_id, region_2_id)
     await dctx.respond(f"Connected {gctx.map.regions[region_1_id].name} to {gctx.map.regions[region_2_id].name} successfully!", ephemeral=True)

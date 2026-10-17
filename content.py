@@ -1,6 +1,8 @@
+from logging import getLogger
 from pathlib import Path
 from shutil import which
 from subprocess import Popen, PIPE
+import time
 from typing import TYPE_CHECKING, TypedDict
 from xml.etree import ElementTree
 from copy import deepcopy
@@ -78,6 +80,7 @@ class GameMap:
             assert self._svg.find(f".//*[@id='{region.svg_id}']") is not None
         
     def render(self, *, highlight: int | None = None, highlight_neighbours: bool = False) -> bytes:
+        start_time = time.time()
         svg = deepcopy(self._svg)
         root = svg.getroot()
         for region in self.regions:
@@ -109,7 +112,10 @@ class GameMap:
         if RSVG_PATH is not None:
             with Popen([RSVG_PATH, "-w", "2000", "-f", "png"], stdout=PIPE, stdin=PIPE) as p:
                 output = p.communicate(ElementTree.tostring(root))[0]
-            return output
         else:
-            return resvg_py.svg_to_bytes(ElementTree.tostring(root, encoding="unicode"), width=2000)
+            output = resvg_py.svg_to_bytes(ElementTree.tostring(root, encoding="unicode"), width=2000)
+        
+            getLogger(f"jloxgame.game").info(f"map generation took {time.time()-start_time:.02f}s")
+            
+        return output
         
