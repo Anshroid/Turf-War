@@ -67,6 +67,10 @@ class TurfWar(GameContext):
     
     @event(callback=cycle_announce)
     def end_cycle(self) -> None:
+        if self.status != Status.RUNNING:
+            self.logger.info("game is not running, cancelling cycles")
+            return
+        
         self.challenge_deck.shuffle(self.rng)
         for region, challenge in zip(self.map.regions, self.challenge_deck.challenges):
             region.locked = False
