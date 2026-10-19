@@ -28,9 +28,9 @@ if not map_dir.exists():
 map_embed = Embed()
 map_embed.set_image(url="attachment://map.png")
 
-def generate_new_map(gctx: TurfWar, *, highlight: int | None = None, highlight_neighbours: bool = False):
+def generate_new_map(gctx: TurfWar, *, highlight_1: Iterable[MapRegion] = [], highlight_2: Iterable[MapRegion] = []):
     map_png_path = map_dir / f"{int(time())}.{gctx.thread_id}.png"
-    map_png_path.write_bytes(gctx.map.render(highlight=highlight, highlight_neighbours=highlight_neighbours))
+    map_png_path.write_bytes(gctx.map.render(highlight_1=highlight_1, highlight_2=highlight_2))
 
     # Maintain the most recent 10 generated map files
     files = sorted(os.listdir(map_dir), reverse=True)

@@ -103,7 +103,7 @@ async def get(dctx: ApplicationContext | Interaction, gctx: TurfWar, region_id: 
     
     challenge_embed = Embed(title=region.challenge.title, description=region.challenge.description)
     
-    map_embed, map_png_path = generate_new_map(gctx, highlight=region_id)
+    map_embed, map_png_path = generate_new_map(gctx, highlight_1=[region])
     await dctx.respond(
         f"Here is the challenge for {region.name}!\n-# {msg}",
         embeds=[challenge_embed, map_embed], 
@@ -143,7 +143,7 @@ async def list_challenges_near(dctx: ApplicationContext, gctx: TurfWar, region_i
     if len(challenges_embed.fields) == 0:
         challenges_embed.description = "There are no claimable neighbours!"
     
-    map_embed, map_png_path = generate_new_map(gctx, highlight=region_id, highlight_neighbours=True)
+    map_embed, map_png_path = generate_new_map(gctx, highlight_1=[selected_region], highlight_2=selected_region.adjacent)
     await dctx.respond(embeds=[challenges_embed, map_embed], file=File(map_png_path, filename="map.png"), ephemeral=True)
 
 @challenge_group.game_command(name="list")

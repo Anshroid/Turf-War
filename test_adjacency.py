@@ -1,17 +1,9 @@
-from util import OwnedBy
 from content import GameMap
 
 m = GameMap()
 
 for region in m.regions:
-    for r in m.regions:
-        r.claim = OwnedBy.UNOWNED
-    
-    region.claim = OwnedBy.RED
-    
-    for neighbour in region.adjacent:
-        neighbour.claim = OwnedBy.YELLOW
-    
     with open("test.png", "wb") as f:
-        f.write(m.render())
+        f.write(m.render(highlight_1=[region], highlight_2=region.adjacent))
+        
     input("press enter to continue")

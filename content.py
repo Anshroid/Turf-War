@@ -3,7 +3,7 @@ from pathlib import Path
 from shutil import which
 from subprocess import Popen, PIPE
 import time
-from typing import TYPE_CHECKING, TypedDict
+from typing import TYPE_CHECKING, Iterable, TypedDict
 from xml.etree import ElementTree
 from copy import deepcopy
 from dataclasses import dataclass, field
@@ -81,7 +81,7 @@ class GameMap:
         for region in self.regions:
             assert self._svg.find(f".//*[@id='{region.svg_id}']") is not None
         
-    def render(self, *, highlight: int | None = None, highlight_neighbours: bool = False) -> bytes:
+    def render(self, *, highlight_1: Iterable[MapRegion], highlight_2: Iterable[MapRegion]) -> bytes:
         start_time = time.time()
         svg = deepcopy(self._svg)
         root = svg.getroot()
@@ -89,8 +89,8 @@ class GameMap:
             element = root.find(f".//*[@id='{region.svg_id}']")
             assert element is not None
             
-            highlighted_1 = highlight == region.idx
-            highlighted_2 = highlight is not None and highlight_neighbours and region in self.regions[highlight].adjacent
+            highlighted_1 = region in highlight_1
+            highlighted_2 = region in highlight_2
             
             claim = region.claim
             colour = MAP_COLOURS[claim] if not region.home else MAP_COLOURS_DARK[claim]
