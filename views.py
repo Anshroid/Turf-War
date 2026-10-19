@@ -31,7 +31,7 @@ class ClaimView(View):
             
             await disable_view(self)
             
-            embed, map_png_path = generate_new_map(self.gctx, highlight=self.region_id)
+            embed, map_png_path = generate_new_map(self.gctx, highlight_1=[region])
             if self.gctx.thread: await self.gctx.thread.send(f"{self.team.name} has claimed {region.name}!", embed=embed, file=File(map_png_path, filename="map.png"))
         
         else:

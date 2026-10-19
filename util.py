@@ -30,7 +30,12 @@ map_embed.set_image(url="attachment://map.png")
 
 def generate_new_map(gctx: TurfWar, *, highlight_1: Iterable[MapRegion] = [], highlight_2: Iterable[MapRegion] = []):
     map_png_path = map_dir / f"{int(time())}.{gctx.thread_id}.png"
-    map_png_path.write_bytes(gctx.map.render(highlight_1=highlight_1, highlight_2=highlight_2))
+    
+    red = gctx.region_counts[OwnedBy.RED]
+    yellow = gctx.region_counts[OwnedBy.YELLOW]
+    total = red + yellow + gctx.region_counts[OwnedBy.UNOWNED]
+        
+    map_png_path.write_bytes(gctx.map.render(red / total, yellow / total, highlight_1=highlight_1, highlight_2=highlight_2))
 
     # Maintain the most recent 10 generated map files
     files = sorted(os.listdir(map_dir), reverse=True)

@@ -1,5 +1,3 @@
-import itertools
-
 from discord import ApplicationContext, File
 
 from content import GameMap, ChallengeDeck
@@ -18,12 +16,8 @@ class TurfWar(GameContext):
         
         self.challenge_deck = ChallengeDeck()
         self.map = GameMap()
-    
-    def count_claims(self) -> tuple[int, int, int]:
-        grouped = itertools.groupby(self.map.regions, lambda region: region.claim)
-        counted = {k: len(list(v)) for k, v in grouped}
         
-        return (counted[OwnedBy.RED], counted[OwnedBy.YELLOW], counted[OwnedBy.UNOWNED])
+        self.region_counts: dict[OwnedBy, int] = {OwnedBy.RED: 1, OwnedBy.YELLOW: 1, OwnedBy.UNOWNED: len(self.map.regions) - 2}
     
     # ============================================== meta state management ==============================================
     
@@ -58,8 +52,10 @@ class TurfWar(GameContext):
             self.logger.info("invalid claim!")
             return False
     
+        self.region_counts[region.claim] -= 1
         region.claim = own
         region.locked = True
+        self.region_counts[region.claim] += 1
         
         return True
     
@@ -81,7 +77,8 @@ class TurfWar(GameContext):
         self.schedule_event(0, CYCLE_INTERVAL_MINUTES, 0, self.end_cycle)
     
     async def win_announce(self) -> None:    
-        red, yellow, _ = self.count_claims()    
+        red = self.region_counts[OwnedBy.RED]
+        yellow = self.region_counts[OwnedBy.YELLOW]
         win_message = "It was a draw!" if red == yellow else f"{self.teams[red < yellow].name} has won!"
         
         if self.thread: await self.thread.send(f"# The game has ended! {win_message}")
@@ -95,8 +92,12 @@ class TurfWar(GameContext):
     @event()
     def force_claim(self, team_id: int, region_id: int, locked: bool = True) -> None:
         region = self.map.regions[region_id]
+        
+        self.region_counts[region.claim] -= 1
         region.claim = OwnedBy(team_id)
         region.locked = locked
+        self.region_counts[region.claim] += 1
+        
     
     @event()
     def force_connect(self, region_1_id: int, region_2_id: int) -> None:

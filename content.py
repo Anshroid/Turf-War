@@ -56,15 +56,13 @@ class GameMap:
             self._svg = ElementTree.parse(f)
         
         for team in [OwnedBy.RED, OwnedBy.YELLOW]:
-            gradient = self._svg.find(f".//*[@id='{team.name}-locked']")
-            assert gradient is not None
-            stops = gradient.findall(".//*")
+            stops = self._svg.findall(f".//*[@id='{team.name}-locked']/*")
             
             stops[0].set("stop-color", MAP_COLOURS[team])
             stops[1].set("stop-color", MAP_COLOURS[team])
             stops[2].set("stop-color", MAP_COLOURS_DARK[team])
             stops[3].set("stop-color", MAP_COLOURS_DARK[team])
-        
+            
         with open(map_path / "map.json", "r") as f:
             region_dicts: list[MapRegionDict] = json.load(f)
             
@@ -81,7 +79,7 @@ class GameMap:
         for region in self.regions:
             assert self._svg.find(f".//*[@id='{region.svg_id}']") is not None
         
-    def render(self, *, highlight_1: Iterable[MapRegion], highlight_2: Iterable[MapRegion]) -> bytes:
+    def render(self, red: float, yellow: float, *, highlight_1: Iterable[MapRegion], highlight_2: Iterable[MapRegion]) -> bytes:
         start_time = time.time()
         svg = deepcopy(self._svg)
         root = svg.getroot()
@@ -110,6 +108,18 @@ class GameMap:
                 highlight_container = root.find(f".//*[@id='highlight-{1 + highlighted_2}-container']")
                 assert highlight_container is not None
                 highlight_container.append(ElementTree.Element("use", {"href": "#" + region.svg_id}))
+        
+        win_bars = root.findall(".//*[@id='win-bar']/*")
+        x_str = win_bars[0].get("x")
+        width_str = win_bars[0].get("width")
+        assert x_str is not None and width_str is not None
+        right = (int(width_str[:-1]) + int(x_str[:-1])) / 100
+        
+        win_bars[1].set("width", f"{red*90:.01f}%")
+        win_bars[1].set("style", f"fill: {MAP_COLOURS[OwnedBy.RED]}")
+        win_bars[2].set("x", f"{right*100 - yellow*90:.01f}%")
+        win_bars[2].set("width", f"{yellow*90:.01f}%")
+        win_bars[2].set("style", f"fill: {MAP_COLOURS[OwnedBy.YELLOW]}")
         
         if RSVG_PATH is not None:
             with Popen([RSVG_PATH, "-w", "2000", "-f", "png"], stdout=PIPE, stdin=PIPE) as p:
