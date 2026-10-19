@@ -3,7 +3,7 @@ import itertools
 from discord import ApplicationContext, File
 
 from content import GameMap, ChallengeDeck
-from util import Status, OwnedBy, colour_convert, generate_new_map
+from util import Status, OwnedBy, claimable, colour_convert, generate_new_map
 from config import GAME_DURATION_MINUTES, MAP_COLOURS, CYCLE_INTERVAL_MINUTES
 
 from jloxgame import GameContext, Team, event
@@ -19,11 +19,17 @@ class TurfWar(GameContext):
         self.challenge_deck = ChallengeDeck()
         self.map = GameMap()
     
+    def count_claims(self) -> tuple[int, int, int]:
+        grouped = itertools.groupby(self.map.regions, lambda region: region.claim)
+        counted = {k: len(list(v)) for k, v in grouped}
+        
+        return (counted[OwnedBy.RED], counted[OwnedBy.YELLOW], counted[OwnedBy.UNOWNED])
+    
+    # ============================================== meta state management ==============================================
+    
     async def configure(self, dctx: ApplicationContext) -> bool:
         self.configuration()
         return True
-    
-    # ============================================== meta state management ==============================================
     
     @event()
     def configuration(self) -> None:
@@ -46,14 +52,10 @@ class TurfWar(GameContext):
     @event()
     def claim_region(self, team_id: int, region_id: int) -> bool:        
         region = self.map.regions[region_id]
-        own = [OwnedBy.RED, OwnedBy.YELLOW][team_id]
+        own = OwnedBy(team_id)
         
-        if region.locked or region.home or region.claim == own:
+        if not claimable(own, region):
             self.logger.info("invalid claim!")
-            return False
-        
-        if not any(neighbour.claim == own for neighbour in region.adjacent):
-            self.logger.info("claim fails adjacency!")
             return False
     
         region.claim = own
@@ -78,13 +80,8 @@ class TurfWar(GameContext):
         
         self.schedule_event(0, CYCLE_INTERVAL_MINUTES, 0, self.end_cycle)
     
-    async def win_announce(self) -> None:
-        grouped = itertools.groupby(self.map.regions, lambda region: region.claim)
-        counted = {k: len(list(v)) for k, v in grouped}
-        
-        red = counted[OwnedBy.RED]
-        yellow = counted[OwnedBy.YELLOW]
-        
+    async def win_announce(self) -> None:    
+        red, yellow, _ = self.count_claims()    
         win_message = "It was a draw!" if red == yellow else f"{self.teams[red < yellow].name} has won!"
         
         if self.thread: await self.thread.send(f"# The game has ended! {win_message}")
@@ -98,7 +95,7 @@ class TurfWar(GameContext):
     @event()
     def force_claim(self, team_id: int, region_id: int, locked: bool = True) -> None:
         region = self.map.regions[region_id]
-        region.claim = [OwnedBy.RED, OwnedBy.YELLOW][team_id]
+        region.claim = OwnedBy(team_id)
         region.locked = locked
     
     @event()

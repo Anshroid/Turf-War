@@ -73,7 +73,7 @@
         "id": 10,
         "name": "(10) New Rd E",
         "svg_id": "patch_13",
-        "default_state": 0,
+        "default_state": 1,
         "adjacent": [3, 7, 9, 13, 36]
     },
     {
@@ -633,7 +633,7 @@
         "id": 90,
         "name": "(90) Queen's Ln S",
         "svg_id": "patch_93",
-        "default_state": 1,
+        "default_state": 0,
         "adjacent": []
     },
     {

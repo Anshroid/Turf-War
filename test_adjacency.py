@@ -12,5 +12,6 @@ for region in m.regions:
     for neighbour in region.adjacent:
         neighbour.claim = OwnedBy.YELLOW
     
-    m.render()
+    with open("test.png", "wb") as f:
+        f.write(m.render())
     input("press enter to continue")

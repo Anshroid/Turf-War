@@ -5,7 +5,7 @@ from config import MAX_PAGE_SIZE
 from jloxgame import JLOXBot
 
 from game import TurfWar
-from util import Status, generate_new_map, choices, OwnedBy
+from util import Status, claimable, generate_new_map, choices, owned_by
 
 from discord import ApplicationContext, Embed, File, Interaction, option, AutocompleteContext, OptionChoice, Member # pyright: ignore[reportUnknownVariableType]
 from discord.ext.pages import Page, Paginator # pyright: ignore[reportMissingTypeStubs]
@@ -42,8 +42,19 @@ def region_autocomplete(ctx: AutocompleteContext) -> Iterable[OptionChoice]:
     team = gctx.get_user_team(ctx.interaction.user)
     regions = [region for region in gctx.map.regions if not region.home]
     if team is not None:
-        own = [OwnedBy.RED, OwnedBy.YELLOW][team.team_id]
-        regions = [region for region in regions if region.claim != own and any(neighbour.claim == own for neighbour in region.adjacent)]
+        regions = [region for region in regions if claimable(owned_by(team), region)]
+    return choices([(region.name, region.idx) for region in regions], ctx.value)
+
+def owned_region_autocomplete(ctx: AutocompleteContext) -> Iterable[OptionChoice]:
+    assert isinstance(ctx.interaction.user, Member)
+    bot = cast(JLOXBot[TurfWar], ctx.bot)
+    gctx = bot.get_game_ctx(ctx)
+    if gctx is None:
+        return []
+    team = gctx.get_user_team(ctx.interaction.user)
+    regions = gctx.map.regions
+    if team is not None:
+        regions = [region for region in regions if region.claim == owned_by(team)]
     return choices([(region.name, region.idx) for region in regions], ctx.value)
 
 challenge_group = bot.create_group("challenge")
@@ -51,7 +62,7 @@ challenge_group = bot.create_group("challenge")
 @challenge_group.game_command()
 @option("region", autocomplete=region_autocomplete, parameter_name="region_id")
 async def get(dctx: ApplicationContext | Interaction, gctx: TurfWar, region_id: int):
-    """Get the challenge for a region you are currently in!"""
+    """Get the challenge for a region!"""
     
     assert isinstance(dctx.user, Member)
     team = gctx.get_user_team(dctx.user)
@@ -61,31 +72,30 @@ async def get(dctx: ApplicationContext | Interaction, gctx: TurfWar, region_id: 
         return
         
     region = gctx.map.regions[region_id]
+    if region.home:
+        await dctx.respond(f"{region.name} is a team's base!", ephemeral=True)
+        return
     
     msg = "If you want to claim this region, make sure it's the right one!"
-    claimable = True
     
     if team is None:
         msg = f"You are not in this game!"
-        claimable = False
+    
     else:
-        own = [OwnedBy.RED, OwnedBy.YELLOW][team.team_id]
+        own = owned_by(team)
         
         if gctx.status != Status.RUNNING:
             msg = f"The game has ended!"
-            claimable = False
         
         elif region.claim == own:
             msg = f"Your team already owns {region.name}!"
-            claimable = False
-            
-        elif region.home:
-            msg = f"{region.name} is the other team's base and cannot be claimed!"
-            claimable = False
         
+        elif region.locked:
+            msg = f"That region is locked for this cycle!"
+            
         elif not any(neighbour.claim == own for neighbour in region.adjacent):
             msg = f"{region.name} is not adjacent to any of your team's owned regions. Ask a referee if you think this is incorrect."
-            claimable = False
+        
     
     if region.challenge is None:
         await dctx.respond("Challenges have not been generated yet!", ephemeral=True)
@@ -93,18 +103,52 @@ async def get(dctx: ApplicationContext | Interaction, gctx: TurfWar, region_id: 
     
     challenge_embed = Embed(title=region.challenge.title, description=region.challenge.description)
     
-    map_embed, map_png_path = generate_new_map(gctx, highlight=region_id, highlight_neighbours=True)
+    map_embed, map_png_path = generate_new_map(gctx, highlight=region_id)
     await dctx.respond(
         f"Here is the challenge for {region.name}!\n-# {msg}",
         embeds=[challenge_embed, map_embed], 
         file=File(map_png_path, filename="map.png"), 
-        view=ClaimView(team, gctx, region_id, disabled=not claimable), # pyright: ignore[reportArgumentType]
+        view=ClaimView(team, gctx, region_id, disabled=not claimable(owned_by(team), region)), # pyright: ignore[reportArgumentType]
         ephemeral=True
     )
+    
+@challenge_group.game_command(name="near")
+@option("region", autocomplete=owned_region_autocomplete, parameter_name="region_id")
+async def list_challenges_near(dctx: ApplicationContext, gctx: TurfWar, region_id: int):
+    """List the challenges for all neighbours of a region!"""
+    
+    assert isinstance(dctx.user, Member)
+    team = gctx.get_user_team(dctx.user)
+    
+    selected_region = gctx.map.regions[region_id]
+    
+    regions = [region for region in selected_region.adjacent if not region.home]
+    
+    if team is not None:
+        regions = (region for region in regions if claimable(owned_by(team), region))
+    
+    challenges_embed = Embed()
+    challenges_embed.title = f"Challenges near {selected_region.name}"
+    
+    for region in regions:
+        if region.home: continue
+        
+        if region.challenge is None:
+            await dctx.respond("Challenges have not been generated yet!", ephemeral=True)
+            return
+        
+        ownership_msg = f"({region.claim.name})" if team is None else ""
+        challenges_embed.add_field(name=f"{region.name} {ownership_msg}- {region.challenge.title}", value=region.challenge.description, inline=False)
+        
+    if len(challenges_embed.fields) == 0:
+        challenges_embed.description = "There are no claimable neighbours!"
+    
+    map_embed, map_png_path = generate_new_map(gctx, highlight=region_id, highlight_neighbours=True)
+    await dctx.respond(embeds=[challenges_embed, map_embed], file=File(map_png_path, filename="map.png"), ephemeral=True)
 
 @challenge_group.game_command(name="list")
 async def list_challenges(dctx: ApplicationContext, gctx: TurfWar):
-    """List the challenges for all regions!"""
+    """List the challenges for all claimable regions!"""
     
     pages: list[Page] = []
     
@@ -114,12 +158,7 @@ async def list_challenges(dctx: ApplicationContext, gctx: TurfWar):
     regions = [region for region in gctx.map.regions if not region.home]
     
     if team is not None:
-        own = [OwnedBy.RED, OwnedBy.YELLOW][team.team_id]
-        regions = [region for region in regions if region.claim != own and any(neighbour.claim == own for neighbour in region.adjacent)]
-    
-    if len(regions) == 0:
-        await dctx.respond("There are no valid regions for you to claim!", ephemeral=True)
-        return
+        regions = [region for region in regions if claimable(owned_by(team), region)]
     
     offset = 0
     while offset < len(regions):
@@ -132,11 +171,16 @@ async def list_challenges(dctx: ApplicationContext, gctx: TurfWar):
                 await dctx.respond("Challenges have not been generated yet!", ephemeral=True)
                 return
             
-            embed.add_field(name=f"{region.name} - {region.challenge.title}", value=region.challenge.description, inline=False)
+            ownership_msg = f"({region.claim.name})" if team is None else ""
+            embed.add_field(name=f"{region.name} {ownership_msg}- {region.challenge.title}", value=region.challenge.description, inline=False)
         
         pages.append(Page(embeds=[embed], custom_view=ChallengeListView(regions[offset:offset+MAX_PAGE_SIZE], get), content="Here are all the challenges!"))
         
         offset += MAX_PAGE_SIZE
+    
+    if len(pages) == 0:
+        await dctx.respond("There are no valid regions for you to claim!", ephemeral=True)
+        return
     
     paginator = Paginator(pages)
     
