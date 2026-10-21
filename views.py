@@ -6,33 +6,34 @@ from discord.ui import Select, View, Button, button
 from content import MapRegion
 from jloxgame.abc import AsyncCallable
 from jloxgame.state import Team
-from util import generate_new_map, disable_view
+from util import claimable, generate_new_map, disable_view, owned_by
 
 if TYPE_CHECKING:
     from game import TurfWar
 
 class ClaimView(View):
-    def __init__(self, team: Team, gctx: TurfWar, region_id: int, disabled: bool = False):
+    def __init__(self, team: Team | None, gctx: TurfWar, region: MapRegion):
         super().__init__(timeout=None)
         
         self.team = team
         self.gctx = gctx
-        self.region_id = region_id
+        self.region = region
         
-        if disabled: self.disable_all_items()
+        if team is None or not claimable(owned_by(team), region): self.disable_all_items()
         
     @button(label="Claim!", style=ButtonStyle.green, emoji="🎯")
     async def confirm(self, button: Button[ClaimView], interaction: Interaction):
-        success = self.gctx.claim_region(self.team.team_id, self.region_id)
+        assert self.team is not None
+        
+        success = self.gctx.claim_region(self.team.team_id, self.region.id)
         
         if success:
-            region = self.gctx.map.regions[self.region_id]
-            await interaction.respond(f"Claimed {region.name}!", ephemeral=True)
+            await interaction.respond(f"Claimed {self.region.name}!", ephemeral=True)
             
             await disable_view(self)
             
-            embed, map_png_path = generate_new_map(self.gctx, highlight_1=[region])
-            if self.gctx.thread: await self.gctx.thread.send(f"{self.team.name} has claimed {region.name}!", embed=embed, file=File(map_png_path, filename="map.png"))
+            embed, map_png_path = generate_new_map(self.gctx, highlight_1=[self.region])
+            if self.gctx.thread: await self.gctx.thread.send(f"{self.team.name} has claimed {self.region.name}!", embed=embed, file=File(map_png_path, filename="map.png"))
         
         else:
             await interaction.respond(f"Something went wrong - the claim is no longer valid!", ephemeral=True)
@@ -49,5 +50,5 @@ class ChallengeListView(View):
                 
                 await get_challenge_fn(interaction, region_id)
             
-        self.add_item(ChallengeListSelect(options = [SelectOption(label=region.name, value=str(region.idx)) for region in regions], placeholder = "Select a region to claim..."))
+        self.add_item(ChallengeListSelect(options = [SelectOption(label=region.name, value=str(region.id)) for region in regions], placeholder = "Select a region to claim..."))
         

@@ -28,7 +28,7 @@ class Challenge:
 MapRegionDict = TypedDict("MapRegionDict", {"name": str, "svg_id": str, "default_state": int, "adjacent": list[int]})
 @dataclass
 class MapRegion:
-    idx: int
+    id: int
     name: str
     svg_id: str
     claim: OwnedBy
@@ -38,7 +38,7 @@ class MapRegion:
     challenge: Challenge | None = None
     
     def __hash__(self) -> int:
-        return hash(self.idx)
+        return hash(self.id)
 
 class ChallengeDeck:
     def __init__(self, challenges_path: Path = Path() / "content" / "challenges.json") -> None:
@@ -56,7 +56,7 @@ class GameMap:
             self._svg = ElementTree.parse(f)
         
         for team in [OwnedBy.RED, OwnedBy.YELLOW]:
-            stops = self._svg.findall(f".//*[@id='{team.name}-locked']/*")
+            stops = self._svg.findall(f"./{{*}}defs/{{*}}linearGradient[@id='{team.name}-locked']/{{*}}stop")
             
             stops[0].set("stop-color", MAP_COLOURS[team])
             stops[1].set("stop-color", MAP_COLOURS[team])
@@ -66,25 +66,36 @@ class GameMap:
         with open(map_path / "map.json", "r") as f:
             region_dicts: list[MapRegionDict] = json.load(f)
             
-        self.regions = [MapRegion(i, r["name"], r["svg_id"], OwnedBy(r["default_state"]), set(), r["default_state"] != 2) for i, r in enumerate(region_dicts)]
-        for region, region_dict in zip(self.regions, region_dicts):
-            region.adjacent = {self.regions[i] for i in region_dict["adjacent"]}
+        self._regions = [MapRegion(i+1, r["name"], r["svg_id"], OwnedBy(r["default_state"]), set(), r["default_state"] != 2) for i, r in enumerate(region_dicts)]
+        for region, region_dict in zip(self._regions, region_dicts):
+            region.adjacent = {self.get_region(i) for i in region_dict["adjacent"]}
         
+        self.region_count = len(self._regions)
+            
         # assert edge relation symmetry
         # for region in self._regions:
         #     for neighbour in region.adjacent:
         #         assert region in neighbour.adjacent
         
         # assert all zones exist
-        for region in self.regions:
+        for region in self._regions:
             assert self._svg.find(f".//*[@id='{region.svg_id}']") is not None
+    
+    def is_valid_region(self, region_id: int) -> bool:
+        return 0 < region_id <= len(self._regions) # region_id is 1-indexed
+    
+    def get_region(self, region_id: int) -> MapRegion:
+        return self._regions[region_id-1] # region_id is 1-indexed
+    
+    def get_regions(self) -> Iterable[MapRegion]:
+        return (region for region in self._regions) # access only as iterable
         
     def render(self, red: float, yellow: float, *, highlight_1: Iterable[MapRegion], highlight_2: Iterable[MapRegion]) -> bytes:
         start_time = time.time()
         svg = deepcopy(self._svg)
         root = svg.getroot()
-        for region in self.regions:
-            element = root.find(f".//*[@id='{region.svg_id}']")
+        for region in self._regions:
+            element = root.find(f"./{{*}}g/{{*}}g[@id='{region.svg_id}']")
             assert element is not None
             
             highlighted_1 = region in highlight_1
@@ -105,11 +116,11 @@ class GameMap:
             
             # fix to display highlight border over other elements (z-index in SVGs is by document order, so effectively duplicate the element at the bottom)
             if highlighted_1 or highlighted_2: 
-                highlight_container = root.find(f".//*[@id='highlight-{1 + highlighted_2}-container']")
+                highlight_container = root.find(f"./{{*}}g/{{*}}g[@id='highlight-{1 + highlighted_2}-container']")
                 assert highlight_container is not None
                 highlight_container.append(ElementTree.Element("use", {"href": "#" + region.svg_id}))
         
-        win_bars = root.findall(".//*[@id='win-bar']/*")
+        win_bars = root.findall("./{*}g[@id='win-bar']/{*}rect")
         x_str = win_bars[0].get("x")
         width_str = win_bars[0].get("width")
         assert x_str is not None and width_str is not None

@@ -17,7 +17,7 @@ class TurfWar(GameContext):
         self.challenge_deck = ChallengeDeck()
         self.map = GameMap()
         
-        self.region_counts: dict[OwnedBy, int] = {OwnedBy.RED: 1, OwnedBy.YELLOW: 1, OwnedBy.UNOWNED: len(self.map.regions) - 2}
+        self.region_counts: dict[OwnedBy, int] = {OwnedBy.RED: 1, OwnedBy.YELLOW: 1, OwnedBy.UNOWNED: self.map.region_count - 2}
     
     # ============================================== meta state management ==============================================
     
@@ -45,7 +45,7 @@ class TurfWar(GameContext):
     
     @event()
     def claim_region(self, team_id: int, region_id: int) -> bool:        
-        region = self.map.regions[region_id]
+        region = self.map.get_region(region_id)
         own = OwnedBy(team_id)
         
         if not claimable(own, region):
@@ -70,7 +70,7 @@ class TurfWar(GameContext):
             return
         
         self.challenge_deck.shuffle(self.rng)
-        for region, challenge in zip(self.map.regions, self.challenge_deck.challenges):
+        for region, challenge in zip(self.map.get_regions(), self.challenge_deck.challenges):
             region.locked = False
             region.challenge = challenge
         
@@ -91,7 +91,7 @@ class TurfWar(GameContext):
     
     @event()
     def force_claim(self, team_id: int, region_id: int, locked: bool = True) -> None:
-        region = self.map.regions[region_id]
+        region = self.map.get_region(region_id)
         
         self.region_counts[region.claim] -= 1
         region.claim = OwnedBy(team_id)
@@ -101,8 +101,8 @@ class TurfWar(GameContext):
     
     @event()
     def force_connect(self, region_1_id: int, region_2_id: int) -> None:
-        region_1 = self.map.regions[region_1_id]
-        region_2 = self.map.regions[region_2_id]
+        region_1 = self.map.get_region(region_1_id)
+        region_2 = self.map.get_region(region_2_id)
         
         region_1.adjacent.add(region_2)
         region_2.adjacent.add(region_1)

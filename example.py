@@ -19,7 +19,7 @@ for i in range(10):
     # input("press enter to continue...")
     
     for i in range(1000):
-        game.claim_region(random.random() > 0.5, random.randint(0, len(game.map.regions)-1))
+        game.claim_region(random.random() > 0.5, random.randint(0, len(game.map._regions)-1))
     
     
     # input("press enter to continue...")

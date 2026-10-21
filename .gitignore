@@ -8,3 +8,7 @@ generated_maps
 TOKEN
 
 test.png
+content/maps/in.json
+content/maps/in.svg
+content/maps/out.json
+content/maps/out.svg

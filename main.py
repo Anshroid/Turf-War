@@ -40,10 +40,10 @@ def region_autocomplete(ctx: AutocompleteContext) -> Iterable[OptionChoice]:
     if gctx is None:
         return []
     team = gctx.get_user_team(ctx.interaction.user)
-    regions = [region for region in gctx.map.regions if not region.home]
+    regions = [region for region in gctx.map.get_regions() if not region.home]
     if team is not None:
         regions = [region for region in regions if claimable(owned_by(team), region)]
-    return choices([(region.name, region.idx) for region in regions], ctx.value)
+    return choices([(region.name, region.id) for region in regions], ctx.value)
 
 def owned_region_autocomplete(ctx: AutocompleteContext) -> Iterable[OptionChoice]:
     assert isinstance(ctx.interaction.user, Member)
@@ -52,10 +52,10 @@ def owned_region_autocomplete(ctx: AutocompleteContext) -> Iterable[OptionChoice
     if gctx is None:
         return []
     team = gctx.get_user_team(ctx.interaction.user)
-    regions = gctx.map.regions
+    regions = gctx.map.get_regions()
     if team is not None:
         regions = [region for region in regions if region.claim == owned_by(team)]
-    return choices([(region.name, region.idx) for region in regions], ctx.value)
+    return choices([(region.name, region.id) for region in regions], ctx.value)
 
 challenge_group = bot.create_group("challenge")
 
@@ -67,11 +67,11 @@ async def get(dctx: ApplicationContext | Interaction, gctx: TurfWar, region_id: 
     assert isinstance(dctx.user, Member)
     team = gctx.get_user_team(dctx.user)
     
-    if not (0 <= region_id < len(gctx.map.regions)):
+    if not gctx.map.is_valid_region(region_id):
         await dctx.respond("Invalid region entered!", ephemeral=True)
         return
         
-    region = gctx.map.regions[region_id]
+    region = gctx.map.get_region(region_id)
     if region.home:
         await dctx.respond(f"{region.name} is a team's base!", ephemeral=True)
         return
@@ -108,7 +108,7 @@ async def get(dctx: ApplicationContext | Interaction, gctx: TurfWar, region_id: 
         f"Here is the challenge for {region.name}!\n-# {msg}",
         embeds=[challenge_embed, map_embed], 
         file=File(map_png_path, filename="map.png"), 
-        view=ClaimView(team, gctx, region_id, disabled=not claimable(owned_by(team), region)), # pyright: ignore[reportArgumentType]
+        view=ClaimView(team, gctx, region),
         ephemeral=True
     )
     
@@ -120,7 +120,7 @@ async def list_challenges_near(dctx: ApplicationContext, gctx: TurfWar, region_i
     assert isinstance(dctx.user, Member)
     team = gctx.get_user_team(dctx.user)
     
-    selected_region = gctx.map.regions[region_id]
+    selected_region = gctx.map.get_region(region_id)
     
     regions = [region for region in selected_region.adjacent if not region.home]
     
@@ -155,7 +155,7 @@ async def list_challenges(dctx: ApplicationContext, gctx: TurfWar):
     assert isinstance(dctx.user, Member)
     team = gctx.get_user_team(dctx.user)
     
-    regions = [region for region in gctx.map.regions if not region.home]
+    regions = [region for region in gctx.map.get_regions() if not region.home]
     
     if team is not None:
         regions = [region for region in regions if claimable(owned_by(team), region)]
@@ -198,7 +198,7 @@ async def claim(dctx: ApplicationContext, gctx: TurfWar, team_id: int, region_id
         return
         
     gctx.force_claim(team_id, region_id, locked)
-    await dctx.respond(f"Force claimed {gctx.map.regions[region_id].name} for {team.name}, {(not locked) * "un"}locked successfully!", ephemeral=True)
+    await dctx.respond(f"Force claimed {gctx.map.get_region(region_id).name} for {team.name}, {(not locked) * "un"}locked successfully!", ephemeral=True)
 
 @bot.referee_group.game_command()
 @option("region-1", autocomplete=region_autocomplete, parameter_name="region_1_id")
@@ -206,15 +206,15 @@ async def claim(dctx: ApplicationContext, gctx: TurfWar, team_id: int, region_id
 async def connect(dctx: ApplicationContext, gctx: TurfWar, region_1_id: int, region_2_id: int):
     """Forcefully connect two regions in the map."""
     
-    if not (0 <= region_1_id < len(gctx.map.regions)):
+    if not gctx.map.is_valid_region(region_1_id):
         await dctx.respond("Invalid region 1 entered!", ephemeral=True)
         return
     
-    if not (0 <= region_2_id < len(gctx.map.regions)):
+    if not gctx.map.is_valid_region(region_2_id):
         await dctx.respond("Invalid region 2 entered!", ephemeral=True)
         return
     
     gctx.force_connect(region_1_id, region_2_id)
-    await dctx.respond(f"Connected {gctx.map.regions[region_1_id].name} to {gctx.map.regions[region_2_id].name} successfully!", ephemeral=True)
+    await dctx.respond(f"Connected {gctx.map.get_region(region_1_id).name} to {gctx.map.get_region(region_2_id).name} successfully!", ephemeral=True)
 
 bot.run(TOKEN)
