@@ -102,8 +102,8 @@ while patch is not None:
     i += 1
     patch = regions.find(f"./{{*}}g[@id='patch_{i}']")
 
-regions.append(ElementTree.Element("g", {"id": "highlight-1-container"}))
 regions.append(ElementTree.Element("g", {"id": "highlight-2-container"}))
+regions.append(ElementTree.Element("g", {"id": "highlight-1-container"}))
 
 i = 1
 path_collection = regions.find(f"./{{*}}g[@id='PathCollection_{i}']")

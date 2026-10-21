@@ -12,6 +12,8 @@ MAP_COLOURS_DARK = {
     OwnedBy.UNOWNED: "#000000" # should never be used?
 }
 
+BACKGROUND_COLOUR = "#0A0A0C"
+
 HIGHLIGHT_1_COLOUR = "#00ff40"
 HIGHLIGHT_2_COLOUR = "#1500ff"
 

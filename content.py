@@ -17,7 +17,7 @@ if RSVG_PATH is None or TYPE_CHECKING:
     import resvg_py
 
 from util import OwnedBy
-from config import HIGHLIGHT_1_COLOUR, HIGHLIGHT_2_COLOUR, MAP_COLOURS, MAP_COLOURS_DARK
+from config import BACKGROUND_COLOUR, HIGHLIGHT_1_COLOUR, HIGHLIGHT_2_COLOUR, MAP_COLOURS, MAP_COLOURS_DARK
 
 ChallengeDict = TypedDict("ChallengeDict", {"title": str, "description": str})
 @dataclass
@@ -139,10 +139,10 @@ class GameMap:
         win_bars[2].set("style", f"fill: {MAP_COLOURS[OwnedBy.YELLOW]}")
         
         if RSVG_PATH is not None:
-            with Popen([RSVG_PATH, "-w", "2000", "-f", "png"], stdout=PIPE, stdin=PIPE) as p:
+            with Popen([RSVG_PATH, "-w", "2000", "-f", "png", "--background-color", BACKGROUND_COLOUR], stdout=PIPE, stdin=PIPE) as p:
                 output = p.communicate(ElementTree.tostring(root))[0]
         else:
-            output = resvg_py.svg_to_bytes(ElementTree.tostring(root, encoding="unicode"), width=2000)
+            output = resvg_py.svg_to_bytes(ElementTree.tostring(root, encoding="unicode"), width=2000, background=BACKGROUND_COLOUR)
         
         getLogger(f"jloxgame.game").info(f"map generation took {time.time()-start_time:.02f}s")
             
