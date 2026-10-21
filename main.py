@@ -125,7 +125,7 @@ async def list_challenges_near(dctx: ApplicationContext, gctx: TurfWar, region_i
     regions = [region for region in selected_region.adjacent if not region.home]
     
     if team is not None:
-        regions = (region for region in regions if claimable(owned_by(team), region))
+        regions = [region for region in regions if claimable(owned_by(team), region)]
     
     challenges_embed = Embed()
     challenges_embed.title = f"Challenges near {selected_region.name}"
@@ -141,10 +141,10 @@ async def list_challenges_near(dctx: ApplicationContext, gctx: TurfWar, region_i
         challenges_embed.add_field(name=f"{region.name} {ownership_msg}- {region.challenge.title}", value=region.challenge.description, inline=False)
         
     if len(challenges_embed.fields) == 0:
-        challenges_embed.description = "There are no claimable neighbours!"
+        challenges_embed.description = "This region has no claimable neighbours!"
     
     map_embed, map_png_path = generate_new_map(gctx, highlight_1=[selected_region], highlight_2=selected_region.adjacent)
-    await dctx.respond(embeds=[challenges_embed, map_embed], file=File(map_png_path, filename="map.png"), ephemeral=True)
+    await dctx.respond(embeds=[challenges_embed, map_embed], file=File(map_png_path, filename="map.png"), view=ChallengeListView(regions, get) if len(regions) > 0 else None, ephemeral=True)
 
 @challenge_group.game_command(name="list")
 async def list_challenges(dctx: ApplicationContext, gctx: TurfWar):
