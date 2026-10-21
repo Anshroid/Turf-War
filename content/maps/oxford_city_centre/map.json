@@ -3,552 +3,552 @@
         "name": "(1) Norfolk St S",
         "svg_id": "region_1",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [2, 5, 22, 24, 25]
     },
     {
         "name": "(2) Bridge St",
         "svg_id": "region_2",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [1, 4, 5, 22]
     },
     {
         "name": "(3) Westgate S Arcade",
         "svg_id": "region_3",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [4, 21]
     },
     {
         "name": "(4) Westgate Leiden Sq",
         "svg_id": "region_4",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [2, 3, 11]
     },
     {
         "name": "(5) Speedwell Street W",
         "svg_id": "region_5",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [1, 2, 11, 6, 89]
     },
     {
         "name": "(6) Faulkner St",
         "svg_id": "region_6",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [10, 8, 5, 89]
     },
     {
         "name": "(7) Albion Pl",
         "svg_id": "region_7",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [8, 88, 89]
     },
     {
         "name": "(8) Littlegate St",
         "svg_id": "region_8",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [15, 9, 7, 6, 10]
     },
     {
         "name": "(9) Turn Again Ln E",
         "svg_id": "region_9",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [14, 15, 8, 10, 11, 21]
     },
     {
         "name": "(10) Pike Terrace",
         "svg_id": "region_10",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [11, 9, 8, 6]
     },
     {
         "name": "(11) Old Greyfriars St",
         "svg_id": "region_11",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [9, 10, 4, 5]
     },
     {
         "name": "(12) Westgate Middle Sq",
         "svg_id": "region_12",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [20, 22, 18, 21, 13]
     },
     {
         "name": "(13) Penny Farthing Pl",
         "svg_id": "region_13",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [14, 12, 16, 15]
     },
     {
         "name": "(14) Roger Bacon Ln",
         "svg_id": "region_14",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [13, 9]
     },
     {
         "name": "(15) St Ebbe's St S",
         "svg_id": "region_15",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [16, 13, 84, 87, 8, 9]
     },
     {
         "name": "(16) St Ebbe's St N",
         "svg_id": "region_16",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [13, 84, 17, 15]
     },
     {
         "name": "(17) Bonn Sq",
         "svg_id": "region_17",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [32, 20, 18, 16, 51, 50]
     },
     {
         "name": "(18) Westgate N Arcade",
         "svg_id": "region_18",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [17, 12]
     },
     {
         "name": "(19) Oxford Castle E",
         "svg_id": "region_19",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [31, 27, 20]
     },
     {
         "name": "(20) Castle St",
         "svg_id": "region_20",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [32, 17, 19, 23, 22, 12]
     },
     {
         "name": "(21) Turn Again Ln W",
         "svg_id": "region_21",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [22, 12, 3, 9]
     },
     {
         "name": "(22) Norfolk St N",
         "svg_id": "region_22",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [20, 23, 12, 21, 24, 1, 2]
     },
     {
         "name": "(23) Paradise St E",
         "svg_id": "region_23",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [27, 26, 25, 24, 20, 22]
     },
     {
         "name": "(24) Paradise Sq",
         "svg_id": "region_24",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [23, 22, 1]
     },
     {
         "name": "(25) Hare's Wharf",
         "svg_id": "region_25",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [26, 23, 1]
     },
     {
         "name": "(26) Paradise St W",
         "svg_id": "region_26",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [25, 27, 23, 28]
     },
     {
         "name": "(27) Oxford Castle S",
         "svg_id": "region_27",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [30, 19, 26, 23]
     },
     {
         "name": "(28) Tidmarsh Ln",
         "svg_id": "region_28",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [35, 30, 26]
     },
     {
         "name": "(29) New Rd W",
         "svg_id": "region_29",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [35, 30, 32]
     },
     {
         "name": "(30) Oxford Castle W",
         "svg_id": "region_30",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [31, 27, 28, 29]
     },
     {
         "name": "(31) Oxford Castle N",
         "svg_id": "region_31",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [32, 30, 19]
     },
     {
         "name": "(32) New Rd E",
         "svg_id": "region_32",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [29, 33, 31, 20, 17]
     },
     {
         "name": "(33) Bulwarks Ln",
         "svg_id": "region_33",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [32, 34, 41]
     },
     {
         "name": "(34) George St Mews",
         "svg_id": "region_34",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [33, 35]
     },
     {
         "name": "(35) Worcester St S",
         "svg_id": "region_35",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [34, 29, 28, 41, 36]
     },
     {
         "name": "(36) Worcester Street N",
         "svg_id": "region_36",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [38, 37, 41, 35]
     },
     {
         "name": "(37) Gloucester Green W",
         "svg_id": "region_37",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [36, 40, 39]
     },
     {
         "name": "(38) Beaumont Street W",
         "svg_id": "region_38",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [36, 43, 44]
     },
     {
         "name": "(39) Gloucester Green C",
         "svg_id": "region_39",
         "default_state": 1,
-        "adjacent": []
+        "adjacent": [37, 40, 43, 41]
     },
     {
         "name": "(40) Bus Station",
         "svg_id": "region_40",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [37, 39, 41]
     },
     {
         "name": "(41) George St W",
         "svg_id": "region_41",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [40, 39, 42, 50, 33, 35, 36]
     },
     {
         "name": "(42) George St E",
         "svg_id": "region_42",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [43, 41, 50, 46, 48]
     },
     {
         "name": "(43) Gloucester St",
         "svg_id": "region_43",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [38, 44, 45, 39, 42]
     },
     {
         "name": "(44) Beaumont St E",
         "svg_id": "region_44",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [38, 43, 46]
     },
     {
         "name": "(45) Friars Entry",
         "svg_id": "region_45",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [43, 46]
     },
     {
         "name": "(46) Magdalen Street W",
         "svg_id": "region_46",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [45, 47, 44, 48, 42]
     },
     {
         "name": "(47) Magdalen Street E",
         "svg_id": "region_47",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [46, 48]
     },
     {
         "name": "(48) Cornmarket St N",
         "svg_id": "region_48",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [46, 42, 49, 59, 58, 60, 47]
     },
     {
         "name": "(49) St Michael's St",
         "svg_id": "region_49",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [50, 48, 58]
     },
     {
         "name": "(50) New Inn Hall St",
         "svg_id": "region_50",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [41, 42, 49, 17]
     },
     {
         "name": "(51) Queen St",
         "svg_id": "region_51",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [17, 58, 53, 83]
     },
     {
         "name": "(52) Golden Cross",
         "svg_id": "region_52",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [58, 55]
     },
     {
         "name": "(53) High St W",
         "svg_id": "region_53",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [55, 56, 73, 54, 81, 83, 51, 58]
     },
     {
         "name": "(54) Alfred St",
         "svg_id": "region_54",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [53, 80, 82]
     },
     {
         "name": "(55) Covered Market",
         "svg_id": "region_55",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [57, 52, 53]
     },
     {
         "name": "(56) Turl St S",
         "svg_id": "region_56",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [61, 62, 57, 53]
     },
     {
         "name": "(57) Market St",
         "svg_id": "region_57",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [55, 58, 61, 56]
     },
     {
         "name": "(58) Cornmarket St S",
         "svg_id": "region_58",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [49, 48, 59, 57, 52, 51, 53, 83]
     },
     {
         "name": "(59) Ship St",
         "svg_id": "region_59",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [48, 58, 61]
     },
     {
         "name": "(60) Broad St W",
         "svg_id": "region_60",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [48, 65, 61]
     },
     {
         "name": "(61) Turl St N",
         "svg_id": "region_61",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [60, 65, 59, 62, 56, 57]
     },
     {
         "name": "(62) Brasenose Ln",
         "svg_id": "region_62",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [56, 61, 70]
     },
     {
         "name": "(63) Bodleian Library",
         "svg_id": "region_63",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [66, 67, 70]
     },
     {
         "name": "(64) Sheldonian Theatre",
         "svg_id": "region_64",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [66, 65]
     },
     {
         "name": "(65) Broad St E",
         "svg_id": "region_65",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [60, 61, 64, 68, 67]
     },
     {
         "name": "(66) Clarendon Quad",
         "svg_id": "region_66",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [64, 63, 67]
     },
     {
         "name": "(67) Catte St N",
         "svg_id": "region_67",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [65, 68, 69, 66, 63, 71]
     },
     {
         "name": "(68) Holywell St",
         "svg_id": "region_68",
         "default_state": 2,
-        "adjacent": []
-    },
-    {
-        "name": "(70) Radcliffe Sq N",
-        "svg_id": "region_69",
-        "default_state": 2,
-        "adjacent": []
+        "adjacent": [65, 67, 69]
     },
     {
         "name": "(69) Bath Pl",
         "svg_id": "region_70",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [68, 67]
+    },
+    {
+        "name": "(70) Radcliffe Sq N",
+        "svg_id": "region_69",
+        "default_state": 2,
+        "adjacent": [63, 71, 62, 72]
     },
     {
         "name": "(71) Catte St S",
         "svg_id": "region_71",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [70, 72, 67, 73]
     },
     {
         "name": "(72) Radcliffe Sq S",
         "svg_id": "region_72",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [70, 71, 73]
     },
     {
         "name": "(73) High St",
         "svg_id": "region_73",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [72, 71, 53, 74, 75, 76]
     },
     {
         "name": "(74) King Edward St",
         "svg_id": "region_74",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [73, 80, 77]
     },
     {
         "name": "(75) Oriel St",
         "svg_id": "region_75",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [73, 77]
     },
     {
         "name": "(76) Magpie Ln",
         "svg_id": "region_76",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [73, 78]
     },
     {
         "name": "(77) Oriel Sq",
         "svg_id": "region_77",
         "default_state": 0,
-        "adjacent": []
+        "adjacent": [74, 75, 80, 78]
     },
     {
         "name": "(78) Merton St",
         "svg_id": "region_78",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [77, 76, 79]
     },
     {
         "name": "(79) Grove Walk",
         "svg_id": "region_79",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [78, 92]
     },
     {
         "name": "(80) Bear Ln",
         "svg_id": "region_80",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [74, 77, 54, 82]
     },
     {
         "name": "(81) Wheatsheaf Yard",
         "svg_id": "region_81",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [53, 82]
     },
     {
         "name": "(82) Blue Boar St",
         "svg_id": "region_82",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [81, 54, 80, 83]
     },
     {
         "name": "(83) St Aldates N",
         "svg_id": "region_83",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [51, 58, 53, 82, 86, 84]
     },
     {
         "name": "(84) Pembroke St",
         "svg_id": "region_84",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [15, 16, 85, 83, 86]
     },
     {
         "name": "(85) Pembroke Sq",
         "svg_id": "region_85",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [84, 86]
     },
     {
         "name": "(86) St Aldates C",
         "svg_id": "region_86",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [85, 84, 83, 87, 90]
     },
     {
         "name": "(87) Brewer St",
         "svg_id": "region_87",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [15, 86, 90]
     },
     {
         "name": "(88) Rose Pl",
         "svg_id": "region_88",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [7, 90]
     },
     {
         "name": "(89) Speedwell St",
         "svg_id": "region_89",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [5, 6, 7, 90]
     },
     {
         "name": "(90) St Aldates S",
         "svg_id": "region_90",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [89, 88, 91, 87, 86]
     },
     {
         "name": "(91) Broad Walk W",
         "svg_id": "region_91",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [90, 92]
     },
     {
         "name": "(92) Broad Walk E",
         "svg_id": "region_92",
         "default_state": 2,
-        "adjacent": []
+        "adjacent": [91, 79]
     }
 ]

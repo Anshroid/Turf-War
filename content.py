@@ -73,9 +73,15 @@ class GameMap:
         self.region_count = len(self._regions)
             
         # assert edge relation symmetry
-        # for region in self._regions:
-        #     for neighbour in region.adjacent:
-        #         assert region in neighbour.adjacent
+        for region in self._regions:
+            for neighbour in region.adjacent:
+                if region not in neighbour.adjacent:
+                    raise ValueError(f"{region.name} should be adjacent to {neighbour.name}")
+        
+        # assert edge relation irreflexivity (for typos)
+        for region in self._regions:
+            if region in region.adjacent:
+                raise ValueError(f"{region.name} should not be adjacent to itself")
         
         # assert all zones exist
         for region in self._regions:

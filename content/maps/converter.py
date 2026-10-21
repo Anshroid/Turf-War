@@ -44,10 +44,13 @@ if style is not None:
         stroke-linecap: round
     } 
     text {
-        font: 6px serif;
+        font: 5px serif;
         fill: #fff;
         text-anchor: middle;
         dominant-baseline: central
+    }
+    circle {
+        fill: #000a
     }
 """
 
@@ -99,6 +102,9 @@ while patch is not None:
     i += 1
     patch = regions.find(f"./{{*}}g[@id='patch_{i}']")
 
+regions.append(ElementTree.Element("g", {"id": "highlight-1-container"}))
+regions.append(ElementTree.Element("g", {"id": "highlight-2-container"}))
+
 i = 1
 path_collection = regions.find(f"./{{*}}g[@id='PathCollection_{i}']")
 labels = ElementTree.Element("g", id="labels")
@@ -116,7 +122,7 @@ while path_collection is not None:
             circle = ElementTree.Element("circle")
             circle.set("cx", use.get("x", ""))
             circle.set("cy", use.get("y", ""))
-            circle.set("r", "5px")
+            circle.set("r", "4px")
             group.insert(0, circle)
         
         labels.append(group)
@@ -135,8 +141,8 @@ root.append(ElementTree.fromstring("""
     <rect x="65%" y="93%" height="3%" width="30%" style="fill: #000" />
 </g>"""))
 
-with open("out.json", "w") as f:
-    json.dump(json_output, f, indent=4)
+# with open("oxford_city_centre/map.json", "w") as f:
+#     json.dump(json_output, f, indent=4)
 
-with open("out.svg", "w") as f:
+with open("oxford_city_centre/map.svg", "w") as f:
     f.write(str(ElementTree.tostring(svg_data.getroot()), "utf-8"))
