@@ -44,7 +44,7 @@ if style is not None:
         stroke-linecap: round
     } 
     text {
-        font: 5px serif;
+        font: 5px sans-serif;
         fill: #fff;
         text-anchor: middle;
         dominant-baseline: central
