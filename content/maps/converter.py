@@ -67,11 +67,11 @@ if style is not None:
 """
 
 defs[0].append(ElementTree.fromstring("""
-<linearGradient id="RED" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
+<linearGradient id="RED">
     <stop stop-color="#ff5252" />
 </linearGradient>"""))
 defs[0].append(ElementTree.fromstring("""
-<linearGradient id="RED-dark" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
+<linearGradient id="RED-dark">
     <stop stop-color="#990000" />
 </linearGradient>"""))
 defs[0].append(ElementTree.fromstring("""
@@ -82,11 +82,11 @@ defs[0].append(ElementTree.fromstring("""
     <stop offset="100%" stop-color="#990000" />
 </linearGradient>"""))
 defs[0].append(ElementTree.fromstring("""
-<linearGradient id="YELLOW" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
+<linearGradient id="YELLOW">
     <stop stop-color="#ffd600" />
 </linearGradient>"""))
 defs[0].append(ElementTree.fromstring("""
-<linearGradient id="YELLOW-dark" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
+<linearGradient id="YELLOW-dark">
     <stop stop-color="#807500" />
 </linearGradient>"""))
 defs[0].append(ElementTree.fromstring("""
@@ -95,6 +95,10 @@ defs[0].append(ElementTree.fromstring("""
     <stop offset="50%" stop-color="#ffd600" />
     <stop offset="50%" stop-color="#807500" />
     <stop offset="100%" stop-color="#807500" />
+</linearGradient>"""))
+defs[0].append(ElementTree.fromstring("""
+<linearGradient id="UNOWNED">
+    <stop stop-color="#fff" />
 </linearGradient>"""))
 
 metadata = root.find("./{*}metadata")

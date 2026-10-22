@@ -26,24 +26,26 @@
     }
 
 </style>
- <linearGradient id="RED" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
+ <linearGradient id="RED">
     <stop stop-color="#ff5252" />
-</linearGradient><linearGradient id="RED-dark" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
+</linearGradient><linearGradient id="RED-dark">
     <stop stop-color="#990000" />
 </linearGradient><linearGradient id="RED-locked" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="#ff5252" />
     <stop offset="50%" stop-color="#ff5252" />
     <stop offset="50%" stop-color="#990000" />
     <stop offset="100%" stop-color="#990000" />
-</linearGradient><linearGradient id="YELLOW" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
+</linearGradient><linearGradient id="YELLOW">
     <stop stop-color="#ffd600" />
-</linearGradient><linearGradient id="YELLOW-dark" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
+</linearGradient><linearGradient id="YELLOW-dark">
     <stop stop-color="#807500" />
 </linearGradient><linearGradient id="YELLOW-locked" x1="0" x2="3" y1="0" y2="3" spreadMethod="repeat" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="#ffd600" />
     <stop offset="50%" stop-color="#ffd600" />
     <stop offset="50%" stop-color="#807500" />
     <stop offset="100%" stop-color="#807500" />
+</linearGradient><linearGradient id="UNOWNED">
+    <stop stop-color="#fff" />
 </linearGradient></defs>
  <g id="regions" style="fill: #fff; stroke: #000; stroke-width: 1px;">
   <g id="region_1">
