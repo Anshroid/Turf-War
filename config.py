@@ -7,8 +7,8 @@ MAP_COLOURS = {
 }
 
 MAP_COLOURS_DARK = {
-    OwnedBy.YELLOW: "#665500",
-    OwnedBy.RED: "#8a0000",
+    OwnedBy.YELLOW: "#807500",
+    OwnedBy.RED: "#990000",
     OwnedBy.UNOWNED: "#000000" # should never be used?
 }
 

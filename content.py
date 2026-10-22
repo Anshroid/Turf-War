@@ -56,12 +56,18 @@ class GameMap:
             self._svg = ElementTree.parse(f)
         
         for team in [OwnedBy.RED, OwnedBy.YELLOW]:
-            stops = self._svg.findall(f"./{{*}}defs/{{*}}linearGradient[@id='{team.name}-locked']/{{*}}stop")
+            stop = self._svg.find(f"./{{*}}defs/{{*}}linearGradient[@id='{team.name}']/{{*}}stop")
+            if stop is not None: stop.set("stop-color", MAP_COLOURS[team])
             
-            stops[0].set("stop-color", MAP_COLOURS[team])
-            stops[1].set("stop-color", MAP_COLOURS[team])
-            stops[2].set("stop-color", MAP_COLOURS_DARK[team])
-            stops[3].set("stop-color", MAP_COLOURS_DARK[team])
+            stop = self._svg.find(f"./{{*}}defs/{{*}}linearGradient[@id='{team.name}-dark']/{{*}}stop")
+            if stop is not None: stop.set("stop-color", MAP_COLOURS_DARK[team])
+            
+            locked_stops = self._svg.findall(f"./{{*}}defs/{{*}}linearGradient[@id='{team.name}-locked']/{{*}}stop")
+            
+            locked_stops[0].set("stop-color", MAP_COLOURS[team])
+            locked_stops[1].set("stop-color", MAP_COLOURS[team])
+            locked_stops[2].set("stop-color", MAP_COLOURS_DARK[team])
+            locked_stops[3].set("stop-color", MAP_COLOURS_DARK[team])
             
         with open(map_path / "map.json", "r") as f:
             region_dicts: list[MapRegionDict] = json.load(f)
@@ -108,7 +114,7 @@ class GameMap:
             highlighted_2 = region in highlight_2
             
             claim = region.claim
-            colour = MAP_COLOURS[claim] if not region.home else MAP_COLOURS_DARK[claim]
+            colour = (claim.name + region.locked*"-locked") if not region.home else f"{claim.name}-dark"
             
             if highlighted_1:
                 style = f"stroke-width: 1.5px; stroke: {HIGHLIGHT_1_COLOUR};"
@@ -117,7 +123,7 @@ class GameMap:
             else:
                 style = ""
                 
-            style += f'fill: {f'url(#{claim.name}-locked)' if region.locked else colour};'
+            style += f'fill: url(#{colour});'
             
             element.set("style", style)
             
@@ -134,10 +140,10 @@ class GameMap:
         right = (int(width_str[:-1]) + int(x_str[:-1])) / 100
         
         win_bars[1].set("width", f"{red*90:.01f}%")
-        win_bars[1].set("style", f"fill: {MAP_COLOURS[OwnedBy.RED]}")
+        win_bars[1].set("style", f"fill: url('#RED')")
         win_bars[2].set("x", f"{right*100 - yellow*90:.01f}%")
         win_bars[2].set("width", f"{yellow*90:.01f}%")
-        win_bars[2].set("style", f"fill: {MAP_COLOURS[OwnedBy.YELLOW]}")
+        win_bars[2].set("style", f"fill: url('#YELLOW')")
         
         if RSVG_PATH is not None:
             with Popen([RSVG_PATH, "-w", "2000", "-f", "png", "--background-color", BACKGROUND_COLOUR], stdout=PIPE, stdin=PIPE) as p:

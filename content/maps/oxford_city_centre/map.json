@@ -230,7 +230,7 @@
     {
         "name": "(39) Gloucester Green C",
         "svg_id": "region_39",
-        "default_state": 1,
+        "default_state": 2,
         "adjacent": [37, 40, 43, 41]
     },
     {
@@ -260,7 +260,7 @@
     {
         "name": "(44) Beaumont St E",
         "svg_id": "region_44",
-        "default_state": 2,
+        "default_state": 1,
         "adjacent": [38, 43, 46]
     },
     {
