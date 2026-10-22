@@ -44,7 +44,7 @@ if style is not None:
         stroke-linecap: round
     } 
     text {
-        font: 5px sans-serif;
+        font: 6px sans-serif;
         fill: #fff;
         text-anchor: middle;
         dominant-baseline: central
@@ -75,7 +75,7 @@ if metadata is not None: root.remove(metadata)
 regions = root.find("./{*}g[@id='figure_1']")
 if regions is None: raise ValueError()
 regions.set("id", "regions")
-regions.set("style", "fill: #fff; stroke: #000; stroke-width: 0.5px;")
+regions.set("style", "fill: #fff; stroke: #000; stroke-width: 1px;")
 
 patch_1 = regions.find("./{*}g[@id='patch_1']")
 if patch_1 is not None: regions.remove(patch_1)
@@ -122,7 +122,7 @@ while path_collection is not None:
             circle = ElementTree.Element("circle")
             circle.set("cx", use.get("x", ""))
             circle.set("cy", use.get("y", ""))
-            circle.set("r", "4px")
+            circle.set("r", "5px")
             group.insert(0, circle)
         
         labels.append(group)

@@ -113,9 +113,10 @@ class GameMap:
             if highlighted_1:
                 style = f"stroke-width: 1.5px; stroke: {HIGHLIGHT_1_COLOUR};"
             elif highlighted_2:
-                style = f"stroke-width: 0.8px; stroke: {HIGHLIGHT_2_COLOUR};"
+                style = f"stroke-width: 1.2px; stroke: {HIGHLIGHT_2_COLOUR};"
             else:
-                style = "stroke-width: 0.2px; stroke: #000;"
+                style = ""
+                
             style += f'fill: {f'url(#{claim.name}-locked)' if region.locked else colour};'
             
             element.set("style", style)
