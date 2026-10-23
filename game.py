@@ -1,7 +1,7 @@
 from discord import ApplicationContext, File
 
-from content import GameMap, ChallengeDeck
-from util import Status, OwnedBy, claimable, colour_convert, generate_new_map
+from content import GameMap, ChallengeDeck, MapRegion
+from util import Status, OwnedBy, colour_convert, generate_new_map
 from config import GAME_DURATION_MINUTES, MAP_COLOURS, CYCLE_INTERVAL_MINUTES
 
 from jloxgame import GameContext, Team, event
@@ -17,7 +17,17 @@ class TurfWar(GameContext):
         self.challenge_deck = ChallengeDeck()
         self.map = GameMap()
         
-        self.region_counts: dict[OwnedBy, int] = {OwnedBy.RED: 1, OwnedBy.YELLOW: 1, OwnedBy.UNOWNED: self.map.region_count - 2}
+        self.claimable_regions: dict[OwnedBy, set[MapRegion]] = {OwnedBy.RED: set(), OwnedBy.YELLOW: set()}
+        self.owned_regions: dict[OwnedBy, set[MapRegion]] = {OwnedBy.RED: set(), OwnedBy.YELLOW: set(), OwnedBy.UNOWNED: set()}
+        
+        for region in self.map.get_regions():
+            self.owned_regions[region.claim].add(region)
+            
+        self.recalculate_claimable()
+    
+    def recalculate_claimable(self):
+        for owned_by in OwnedBy:
+            self.claimable_regions[owned_by] = {region for region in self.map.get_regions() if region.claimable_by(owned_by)}
     
     # ============================================== meta state management ==============================================
     
@@ -48,14 +58,16 @@ class TurfWar(GameContext):
         region = self.map.get_region(region_id)
         own = OwnedBy(team_id)
         
-        if not claimable(own, region):
+        if not region.claimable_by(own):
             self.logger.info("invalid claim!")
             return False
     
-        self.region_counts[region.claim] -= 1
+        self.owned_regions[region.claim].remove(region)
         region.claim = own
         region.locked = True
-        self.region_counts[region.claim] += 1
+        self.owned_regions[region.claim].add(region)
+        
+        self.recalculate_claimable()
         
         return True
     
@@ -74,11 +86,13 @@ class TurfWar(GameContext):
             region.locked = False
             region.challenge = challenge
         
+        self.recalculate_claimable()
+        
         self.schedule_event(0, CYCLE_INTERVAL_MINUTES, 0, self.end_cycle)
     
     async def win_announce(self) -> None:    
-        red = self.region_counts[OwnedBy.RED]
-        yellow = self.region_counts[OwnedBy.YELLOW]
+        red = len(self.owned_regions[OwnedBy.RED])
+        yellow = len(self.owned_regions[OwnedBy.YELLOW])
         win_message = "It was a draw!" if red == yellow else f"{self.teams[red < yellow].name} has won!"
         
         if self.thread: await self.thread.send(f"# The game has ended! {win_message}")
@@ -93,10 +107,12 @@ class TurfWar(GameContext):
     def force_claim(self, team_id: int, region_id: int, locked: bool = True) -> None:
         region = self.map.get_region(region_id)
         
-        self.region_counts[region.claim] -= 1
+        self.owned_regions[region.claim].remove(region)
         region.claim = OwnedBy(team_id)
         region.locked = locked
-        self.region_counts[region.claim] += 1
+        self.owned_regions[region.claim].add(region)
+        
+        self.recalculate_claimable()
         
     
     @event()

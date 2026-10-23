@@ -215,8 +215,8 @@ root.append(labels)
 root.append(ElementTree.fromstring("""
 <g id="win-bar">
     <rect x="5%" y="93%" height="3%" width="90%" style="fill: #fff; stroke: #fff; stroke-width: 1.5px" />
-    <rect x="5%" y="93%" height="3%" width="30%" style="fill: #000" />
-    <rect x="65%" y="93%" height="3%" width="30%" style="fill: #000" />
+    <rect x="5%" y="93%" height="3%" width="30%" style="fill: url(#RED)" />
+    <rect x="65%" y="93%" height="3%" width="30%" style="fill: url(#YELLOW)" />
 </g>"""))
 
 key_pos = (235, 220)

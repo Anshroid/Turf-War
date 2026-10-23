@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Iterable
 
 from discord import ButtonStyle, File, Interaction, SelectOption
 from discord.ui import Select, View, Button, button
@@ -6,7 +6,7 @@ from discord.ui import Select, View, Button, button
 from content import MapRegion
 from jloxgame.abc import AsyncCallable
 from jloxgame.state import Team
-from util import claimable, generate_new_map, disable_view, owned_by
+from util import  generate_new_map, disable_view, owned_by
 
 if TYPE_CHECKING:
     from game import TurfWar
@@ -19,7 +19,7 @@ class ClaimView(View):
         self.gctx = gctx
         self.region = region
         
-        if team is None or not claimable(owned_by(team), region): self.disable_all_items()
+        if team is None or not region.claimable_by(owned_by(team)): self.disable_all_items()
         
     @button(label="Claim!", style=ButtonStyle.green, emoji="🎯")
     async def confirm(self, button: Button[ClaimView], interaction: Interaction):
@@ -39,7 +39,7 @@ class ClaimView(View):
             await interaction.respond(f"Something went wrong - the claim is no longer valid!", ephemeral=True)
 
 class ChallengeListView(View):
-    def __init__(self, regions: list[MapRegion], get_challenge_fn: AsyncCallable[[Interaction, int], None]):
+    def __init__(self, regions: Iterable[MapRegion], get_challenge_fn: AsyncCallable[[Interaction, int], None]):
         super().__init__(timeout=None)
         
         class ChallengeListSelect(Select):

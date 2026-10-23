@@ -5,7 +5,7 @@ from config import MAX_PAGE_SIZE
 from jloxgame import JLOXBot
 
 from game import TurfWar
-from util import Status, claimable, generate_new_map, choices, owned_by
+from util import Status, generate_new_map, choices, owned_by
 
 from discord import ApplicationContext, Embed, File, Interaction, option, AutocompleteContext, OptionChoice, Member # pyright: ignore[reportUnknownVariableType]
 from discord.ext.pages import Page, Paginator # pyright: ignore[reportMissingTypeStubs]
@@ -39,10 +39,14 @@ def region_autocomplete(ctx: AutocompleteContext) -> Iterable[OptionChoice]:
     gctx = bot.get_game_ctx(ctx)
     if gctx is None:
         return []
+    
     team = gctx.get_user_team(ctx.interaction.user)
-    regions = [region for region in gctx.map.get_regions() if not region.home]
+    
     if team is not None:
-        regions = [region for region in regions if claimable(owned_by(team), region)]
+        regions = gctx.claimable_regions[owned_by(team)]
+    else:
+        regions = [region for region in gctx.map.get_regions() if not region.home]
+    
     return choices([(region.name, region.id) for region in regions], ctx.value)
 
 def owned_region_autocomplete(ctx: AutocompleteContext) -> Iterable[OptionChoice]:
@@ -51,10 +55,14 @@ def owned_region_autocomplete(ctx: AutocompleteContext) -> Iterable[OptionChoice
     gctx = bot.get_game_ctx(ctx)
     if gctx is None:
         return []
+    
     team = gctx.get_user_team(ctx.interaction.user)
-    regions = gctx.map.get_regions()
+    
     if team is not None:
-        regions = [region for region in regions if region.claim == owned_by(team)]
+        regions = gctx.owned_regions[owned_by(team)]
+    else:
+        regions = gctx.map.get_regions()
+    
     return choices([(region.name, region.id) for region in regions], ctx.value)
 
 challenge_group = bot.create_group("challenge")
@@ -122,10 +130,10 @@ async def list_challenges_near(dctx: ApplicationContext, gctx: TurfWar, region_i
     
     selected_region = gctx.map.get_region(region_id)
     
-    regions = [region for region in selected_region.adjacent if not region.home]
+    regions = {region for region in selected_region.adjacent if not region.home}
     
     if team is not None:
-        regions = [region for region in regions if claimable(owned_by(team), region)]
+        regions &= gctx.claimable_regions[owned_by(team)]
     
     challenges_embed = Embed()
     challenges_embed.title = f"Challenges near {selected_region.name}"
@@ -158,7 +166,7 @@ async def list_challenges(dctx: ApplicationContext, gctx: TurfWar):
     regions = [region for region in gctx.map.get_regions() if not region.home]
     
     if team is not None:
-        regions = [region for region in regions if claimable(owned_by(team), region)]
+        regions = list(gctx.claimable_regions[owned_by(team)])
     
     offset = 0
     while offset < len(regions):

@@ -39,6 +39,14 @@ class MapRegion:
     
     def __hash__(self) -> int:
         return hash(self.id)
+    
+    def claimable_by(self, team: OwnedBy): 
+        return (
+            not self.home
+            and not self.locked 
+            and self.claim != team
+            and any(neighbour.claim == team for neighbour in self.adjacent)
+        )
 
 class ChallengeDeck:
     def __init__(self, challenges_path: Path = Path() / "content" / "challenges.json") -> None:
@@ -140,10 +148,8 @@ class GameMap:
         right = (int(width_str[:-1]) + int(x_str[:-1])) / 100
         
         win_bars[1].set("width", f"{red*90:.01f}%")
-        win_bars[1].set("style", f"fill: url('#RED')")
         win_bars[2].set("x", f"{right*100 - yellow*90:.01f}%")
         win_bars[2].set("width", f"{yellow*90:.01f}%")
-        win_bars[2].set("style", f"fill: url('#YELLOW')")
         
         if RSVG_PATH is not None:
             with Popen([RSVG_PATH, "-w", "2000", "-f", "png", "--background-color", BACKGROUND_COLOUR], stdout=PIPE, stdin=PIPE) as p:

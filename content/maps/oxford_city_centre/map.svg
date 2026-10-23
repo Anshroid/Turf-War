@@ -618,6 +618,6 @@
     </g>
    </g><g id="win-bar">
     <rect x="5%" y="93%" height="3%" width="90%" style="fill: #fff; stroke: #fff; stroke-width: 1.5px" />
-    <rect x="5%" y="93%" height="3%" width="30%" style="fill: #000" />
-    <rect x="65%" y="93%" height="3%" width="30%" style="fill: #000" />
+    <rect x="5%" y="93%" height="3%" width="30%" style="fill: url(#RED)" />
+    <rect x="65%" y="93%" height="3%" width="30%" style="fill: url(#YELLOW)" />
 </g><g id="key"><text x="235" y="217">Key:</text><rect x="235" y="220" width="6px" height="6px" style="fill: url(#RED)" /><rect x="235" y="228" width="6px" height="6px" style="fill: url(#YELLOW)" /><rect x="235" y="236" width="6px" height="6px" style="fill: url(#RED-locked)" /><rect x="235" y="244" width="6px" height="6px" style="fill: url(#YELLOW-locked)" /><rect x="235" y="252" width="6px" height="6px" style="fill: url(#RED-dark)" /><rect x="235" y="260" width="6px" height="6px" style="fill: url(#YELLOW-dark)" /><circle cx="238" cy="271" r="3px" /><rect x="236.125" y="270.4375" width="3.75px" height="1.125px" /><rect x="237.4375" y="269.125" width="1.125px" height="3.75px" /><text x="243" y="225">Owned by Red Team</text><text x="243" y="233">Owned by Yellow Team</text><text x="243" y="241">Owned by Red Team, locked</text><text x="243" y="249">Owned by Yellow Team, locked</text><text x="243" y="257">Red Team's home region</text><text x="243" y="265">Yellow Team's home region</text><text x="243" y="273">Respawn point</text></g></svg>

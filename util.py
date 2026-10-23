@@ -31,9 +31,9 @@ map_embed.set_image(url="attachment://map.png")
 def generate_new_map(gctx: TurfWar, *, highlight_1: Iterable[MapRegion] = [], highlight_2: Iterable[MapRegion] = []):
     map_png_path = map_dir / f"{int(time())}.{gctx.thread_id}.png"
     
-    red = gctx.region_counts[OwnedBy.RED]
-    yellow = gctx.region_counts[OwnedBy.YELLOW]
-    total = red + yellow + gctx.region_counts[OwnedBy.UNOWNED]
+    red = len(gctx.owned_regions[OwnedBy.RED])
+    yellow = len(gctx.owned_regions[OwnedBy.YELLOW])
+    total = red + yellow + len(gctx.owned_regions[OwnedBy.UNOWNED])
         
     map_png_path.write_bytes(gctx.map.render(red / total, yellow / total, highlight_1=highlight_1, highlight_2=highlight_2))
 
@@ -56,11 +56,3 @@ async def disable_view(view: View):
     if view.parent: await view.parent.edit_original_response(view=view)
 
 def owned_by(team: Team) -> OwnedBy: return OwnedBy(team.team_id)
-
-def claimable(team: OwnedBy, region: MapRegion): 
-    return (
-        not region.home
-        and not region.locked 
-        and region.claim != team
-        and any(neighbour.claim == team for neighbour in region.adjacent)
-    )
