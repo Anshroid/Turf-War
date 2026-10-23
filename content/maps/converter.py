@@ -60,7 +60,7 @@ if style is not None:
         fill: #fff
     }
     #key text {
-        font: 6px sans-serif;
+        font: 5px sans-serif;
         fill: #fff;
     }
 
@@ -195,7 +195,7 @@ while path_collection is not None:
             use.tag = "text"
             del use.attrib["{http://www.w3.org/1999/xlink}href"]
             del use.attrib["style"]
-            use.text = str(i)
+            use.text = str(i-5)
             
             circle = ElementTree.Element("circle")
             circle.set("cx", use.get("x", ""))
@@ -219,7 +219,7 @@ root.append(ElementTree.fromstring("""
     <rect x="65%" y="93%" height="3%" width="30%" style="fill: #000" />
 </g>"""))
 
-key_pos = (230, 220)
+key_pos = (235, 220)
 key = ElementTree.Element("g", id="key")
 
 t = ElementTree.Element("text", {"x": str(key_pos[0]), "y": str(key_pos[1]-3)})
