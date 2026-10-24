@@ -1,10 +1,11 @@
 from discord import ApplicationContext, File
 
 from content import GameMap, ChallengeDeck, MapRegion
-from util import Status, OwnedBy, colour_convert, generate_new_map
+from util import Status, OwnedBy, colour_convert, disable_view, generate_new_map
 from config import GAME_DURATION_MINUTES, MAP_COLOURS, CYCLE_INTERVAL_MINUTES
 
 from jloxgame import GameContext, Team, event
+from views import ClaimView
 
 class TurfWar(GameContext):
     def __init__(self) -> None:
@@ -16,6 +17,9 @@ class TurfWar(GameContext):
         
         self.challenge_deck = ChallengeDeck()
         self.map = GameMap()
+        
+        self.cycle = 0
+        self.get_challenge_views: list[ClaimView] = []
         
         self.claimable_regions: dict[OwnedBy, set[MapRegion]] = {OwnedBy.RED: set(), OwnedBy.YELLOW: set()}
         self.owned_regions: dict[OwnedBy, set[MapRegion]] = {OwnedBy.RED: set(), OwnedBy.YELLOW: set(), OwnedBy.UNOWNED: set()}
@@ -72,6 +76,9 @@ class TurfWar(GameContext):
         return True
     
     async def cycle_announce(self) -> None:
+        for view in self.get_challenge_views:
+            await disable_view(view)
+            
         embed, map_png_path = generate_new_map(self)
         if self.thread: await self.thread.send("Challenges have been refreshed! Here is the current state of the map.", embed=embed, file=File(map_png_path, filename="map.png"))
     
@@ -87,6 +94,8 @@ class TurfWar(GameContext):
             region.challenge = challenge
         
         self.recalculate_claimable()
+        
+        self.cycle += 1
         
         self.schedule_event(0, CYCLE_INTERVAL_MINUTES, 0, self.end_cycle)
     

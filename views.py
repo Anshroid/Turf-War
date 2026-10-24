@@ -19,11 +19,17 @@ class ClaimView(View):
         self.gctx = gctx
         self.region = region
         
+        self.cycle = self.gctx.cycle
+        self.gctx.get_challenge_views.append(self)
+        
         if team is None or not region.claimable_by(owned_by(team)): self.disable_all_items()
         
     @button(label="Claim!", style=ButtonStyle.green, emoji="🎯")
     async def confirm(self, button: Button[ClaimView], interaction: Interaction):
         assert self.team is not None
+        
+        if self.cycle != self.gctx.cycle:
+            await interaction.respond("This challenge is from a previous cycle!", ephemeral=True)
         
         success = self.gctx.claim_region(self.team.team_id, self.region.id)
         
