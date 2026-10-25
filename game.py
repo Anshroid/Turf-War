@@ -131,3 +131,17 @@ class TurfWar(GameContext):
         
         region_1.adjacent.add(region_2)
         region_2.adjacent.add(region_1)
+        
+        self.recalculate_claimable()
+        
+    
+    @event()
+    def force_disconnect(self, region_1_id: int, region_2_id: int) -> None:
+        region_1 = self.map.get_region(region_1_id)
+        region_2 = self.map.get_region(region_2_id)
+        
+        region_1.adjacent.remove(region_2)
+        region_2.adjacent.remove(region_1)
+        
+        self.recalculate_claimable()
+        

@@ -225,4 +225,25 @@ async def connect(dctx: ApplicationContext, gctx: TurfWar, region_1_id: int, reg
     gctx.force_connect(region_1_id, region_2_id)
     await dctx.respond(f"Connected {gctx.map.get_region(region_1_id).name} to {gctx.map.get_region(region_2_id).name} successfully!", ephemeral=True)
 
+@bot.referee_group.game_command()
+@option("region-1", autocomplete=region_autocomplete, parameter_name="region_1_id")
+@option("region-2", autocomplete=region_autocomplete, parameter_name="region_2_id")
+async def disconnect(dctx: ApplicationContext, gctx: TurfWar, region_1_id: int, region_2_id: int):
+    """Forcefully disconnect two regions in the map."""
+    
+    if not gctx.map.is_valid_region(region_1_id):
+        await dctx.respond("Invalid region 1 entered!", ephemeral=True)
+        return
+    
+    if not gctx.map.is_valid_region(region_2_id):
+        await dctx.respond("Invalid region 2 entered!", ephemeral=True)
+        return
+    
+    region_2 = gctx.map.get_region(region_2_id)
+    if region_2 not in gctx.map.get_region(region_1_id).adjacent:
+        await dctx.respond("Those regions are not connected!", ephemeral=True)
+    
+    gctx.force_disconnect(region_1_id, region_2_id)
+    await dctx.respond(f"Disconnected {gctx.map.get_region(region_1_id).name} from {gctx.map.get_region(region_2_id).name} successfully!", ephemeral=True)
+
 bot.run(TOKEN)
