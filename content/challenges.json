@@ -4,28 +4,12 @@
         "description": "In any sport or board game, score a single point. You must follow all the rules of the game."
     },
     {
-        "title": "Guess your elevation",
-        "description": "Carfax Tower sits at 72m above sea level. Guess your current elevation to within 10%"
-    },
-    {
         "title": "Water pong",
         "description": "Throw a ball into a cup of water from at least 2 metres away. The cup and ball may be makeshift."
     },
     {
         "title": "Melt something",
         "description": "Heat any solid object until it becomes liquid."
-    },
-    {
-        "title": "Pet a pet",
-        "description": "Touch a pet. If the owner is present, you must ask permission."
-    },
-    {
-        "title": "Solve a puzzle",
-        "description": "In any physical newspaper, completely solve a puzzle. You may not look up the answers."
-    },
-    {
-        "title": "Catch your food",
-        "description": "Obtain a food item and throw it into your own mouth. The throw must peak above your head."
     },
     {
         "title": "Cry",
@@ -45,27 +29,19 @@
     },
     {
         "title": "Fail a maths minute spectacularly",
-        "description": "Answer every question in a maths minute. Your answers must have no digits in common with the correct answer. Two of you must complete this challenge on the same attempt."
+        "description": "Answer every question in a [standard maths minute](https://webmathminute.com/online) (no timer). Your answers must have no digits in common with the correct answer."
     },
     {
         "title": "Balancing act",
-        "description": "Place a leaf on your head and walk the full length of the longest street on your block without it falling off. You may not attach the leaf to your head or hair."
-    },
-    {
-        "title": "Break a law from Crime Spree",
-        "description": "Check the [relevant map](https://www.google.com/maps/d/u/0/edit?mid=11ncXh-x6-hBPaOXRW5Y_b5uXiOu-3wVO&usp=drive-link) and perform any action described at any location."
+        "description": "Place a pebble on your head and walk the full length of the longest street on your block without it falling off. You may not attach the pebble to your head or hair."
     },
     {
         "title": "Advertise JL:OX",
-        "description": "Make a leaflet or poster for Jet Lag: Oxford, including our logo and this entire challenge description, then display it in public."
+        "description": "Make a leaflet or poster for Jet Lag: Oxford, including our logo and this entire challenge description, then display it in public. Remove it before leaving the region - do not litter!"
     },
     {
         "title": "Choreograph a dance",
-        "description": "Choreograph and perform a dance. The dance must contain 10 different moves, and all team members must perform the dance simultaneously."
-    },
-    {
-        "title": "Build a tower",
-        "description": "Using any materials you like, build a free-standing tower which is at least one metre tall."
+        "description": "Choreograph and perform a dance. The dance must contain 10 different moves, and all teammates in your region must participate"
     },
     {
         "title": "Forge a graffito",
@@ -73,11 +49,11 @@
     },
     {
         "title": "Litter picking",
-        "description": "Find five pieces of litter and put them in the correct bin. You may not split litter into more pieces."
+        "description": "Find five pieces of litter in the region and put them in the correct bin. The bin does not need to be in the region, but the litter must be found in it. You may not split litter into more pieces."
     },
     {
         "title": "Critique some architecture",
-        "description": "Go to the largest building in your region and say or write five things you like about it and five things you would change about it."
+        "description": "Go to the largest building bordering your region and say or write five things you like about it and five things you would change about it."
     },
     {
         "title": "High five",
@@ -85,23 +61,11 @@
     },
     {
         "title": "Post a letter",
-        "description": "Write a letter with your home address and at least 100 words describing your surroundings, then post it in a postbox."
+        "description": "Write a letter with at least 100 words describing your surroundings. Do not post it without valid postage - this is littering."
     },
     {
         "title": "Compose a poem",
-        "description": "Write a poem describing your surroundings, at least 30 words and 4 lines long, obeying a consistent meter or rhyme scheme"
-    },
-    {
-        "title": "Review a bunch of benches",
-        "description": "Sit on three different benches, and give each one a star rating with a reason."
-    },
-    {
-        "title": "Catch a critter",
-        "description": "Catch an insect or bug in some kind of container, name it, then release it."
-    },
-    {
-        "title": "Play hopscotch",
-        "description": "Find or draw a hopscotch court of at least 8 spaces and play a full round of hopscotch, using a stone as a marker."
+        "description": "Write a poem describing your surroundings, at least 30 words and 4 lines long, obeying a consistent meter or rhyme scheme. Free verse is not allowed."
     },
     {
         "title": "Ascend a hundred steps",
@@ -109,23 +73,11 @@
     },
     {
         "title": "Make a trade",
-        "description": "Not counting money, successfully trade something with a stranger."
-    },
-    {
-        "title": "Calculate average frequency",
-        "description": "Find a bus timetable and calculate the average interval between buses arriving over a 24 hour period. Use this to find the average number of buses per hour."
-    },
-    {
-        "title": "Make a musical instrument",
-        "description": "Using any materials, construct something with which you can produce a recognisable tune."
+        "description": "Without using money, successfully trade something with a stranger."
     },
     {
         "title": "Fly a paper aeroplane",
-        "description": "Make and throw a paper aeroplane. It must travel at least 30 feet."
-    },
-    {
-        "title": "Predict traffic flow",
-        "description": "At any pedestrian crossing, either predict the number of cars that will cross it in 5 minutes, or predict the time in minutes it will take for the next car to cross it. Your answer must be 1 or higher, and must be accurate within 10%."
+        "description": "Make and throw a paper aeroplane. It must travel at least 30 feet horizontally."
     },
     {
         "title": "Find today's date",
@@ -133,63 +85,47 @@
     },
     {
         "title": "Charge your phone",
-        "description": "Through whatever means, get your phone to successfully charge."
-    },
-    {
-        "title": "Geocaching",
-        "description": "Find and sign a geocache."
-    },
-    {
-        "title": "Feed a bird",
-        "description": "Buy any food safe for birds to eat and feed it to any bird."
+        "description": "Through whatever means, get your phone to successfully charge without using items you already have."
     },
     {
         "title": "Wear a non-hat hat",
-        "description": "Wear something on your head that was not made to be headgear. It must remain on your head until you complete your next challenge, otherwise you automatically veto."
-    },
-    {
-        "title": "Climb a tree",
-        "description": "Find a tree with a trunk at least one foot thick, and climb it to a height of at least 6 feet above ground."
+        "description": "Wear something on your head that was not made to be headgear. It must remain on your head until you complete your next challenge, otherwise you are instantly KO'd."
     },
     {
         "title": "Spell a street name",
         "description": "Find every letter in the full name of any street in the area on other signs. The signs must be outside, you may not use street name signs, and you may not use the same sign twice."
     },
     {
-        "title": "Land bottle flips",
-        "description": "Flip a partially filled bottle so that it completes a somersault and lands upright. Each team member must complete this challenge."
+        "title": "Land consecutive bottle flips",
+        "description": "Flip a partially filled bottle so that it completes a somersault and lands upright. Do this twice in a row."
     },
     {
         "title": "Score a goal",
-        "description": "Make some goalposts at most 8 yards apart and kick a ball through them from a distance of 12 yards."
+        "description": "Make some goalposts at most 8 metres apart and kick a ball through them from a distance of 12 metres."
     },
     {
         "title": "Crown your ally",
-        "description": "Craft a crown out of any material, and bestow it to a teammate ceremonially. They must wear this crown until you take a new tower. If they stop for any reason, repeat the ceremony at the original location"
+        "description": "Craft a crown out of any material, and bestow it to a teammate ceremonially. They must wear this crown until they claim a new region. If they stop for any reason, repeat the ceremony at the original location"
     },
     {
         "title": "Exercise class",
-        "description": "Do 5 cartweels, 10 burpees, 15 squats or 20 starjumps."
+        "description": "Do 5 cartwheels, 10 burpees, 15 squats or 20 starjumps."
     },
     {
         "title": "Count out your steps",
-        "description": "Estimate the number of steps it will take you to cross the region. Walk it in exactly this many steps. You get one guess and one attempt."
-    },
-    {
-        "title": "Donate to charity",
-        "description": "In any provable way, contribute financially to a charitable organisation."
+        "description": "Estimate the number of steps it will take you to walk from one edge of your region to another non-adjacent edge. Walk it in exactly this many steps. You get one guess and one attempt."
     },
     {
         "title": "Design a flag",
-        "description": "Design a flag for the area. It must include at least 3 colours and at least 3 features, and each team member must contribute."
+        "description": "Design a flag for the area. It must include at least 3 colours and at least 3 features."
     },
     {
         "title": "Hug the trees",
-        "description": "Hug every tree in the region."
+        "description": "Hug every tree in the region. There must be at least one."
     },
     {
         "title": "Trace silhouettes",
-        "description": "Find something at least 4 feet tall casting a shadow onto dirt, sand, or gravel. Trace its shadow's outline."
+        "description": "Find something at least 1 metre tall casting a shadow onto dirt, sand, or gravel. Trace its shadow's outline."
     },
     {
         "title": "Mimic some models",
@@ -201,47 +137,27 @@
     },
     {
         "title": "Make a putt",
-        "description": "Putt a ball into a cup from at least 2 metres away. The cup, ball, and club may be makeshift, but the club must be at least two feet long."
+        "description": "Putt a ball into a cup from at least 2 metres away. The cup, ball, and club may be makeshift, but the club must be at least 60cm long."
     },
     {
         "title": "Talk without fifth glyphs",
-        "description": "Craft (or buy from a charity shop) and don an ascot or similar formal cloth, stand on public sitting apparatus, then impart your opinions about a topic of your choosing, lasting a minimum of 30 ticks. No words you say may contain 'e'. Writing flashcards is okay."
+        "description": "On public sitting apparatus, then impart your opinions about a topic of your choosing, lasting a minimum of 30s. No words you say may contain 'e'. Writing flashcards is okay."
     },
     {
         "title": "Parrot an animal sound",
-        "description": "Copy a sound vocalised by a non-human animal."
-    },
-    {
-        "title": "Make a sandwich",
-        "description": "Put two foodstuffs between two slices of bread and take a bite"
+        "description": "Hear then copy a sound vocalised by a non-human animal."
     },
     {
         "title": "Shout it out",
         "description": "Stand at least 10 metres apart, with a road, river, or path between you. Get a teammate to repeat a sentence from the Nonsense Generator by shouting it to them."
     },
     {
-        "title": "Return a shopping basket",
-        "description": "In any shop, find a misplaced shopping basket and return it to the stacks."
-    },
-    {
         "title": "Experience paredolia",
         "description": "Take photos of 4 objects resembling faces. You may not use objects that are supposed to look like animals or humans."
     },
     {
-        "title": "Transfer the texture of trees",
-        "description": "Find a forest, then use a pencil to copy the texture of 6 different trees onto a single piece of paper."
-    },
-    {
-        "title": "Have your five a day",
-        "description": "Your team must eat a total of five fruits or vegetables. As long as you are in this region, all teammates can contribute."
-    },
-    {
         "title": "Name fifty women",
-        "description": "It's as simple as it sounds. They must be real women."
-    },
-    {
-        "title": "Discover documented life",
-        "description": "Find a pictoral represetation of an animal or plant and then find it in the wild. It must at least be in the same taxonomic family."
+        "description": "It's as simple as it sounds. They must be real and alive women."
     },
     {
         "title": "Copy Wikipedia",
@@ -253,23 +169,15 @@
     },
     {
         "title": "Bat a ball",
-        "description": "Bat a ball. The ball must be thrown from a distance of at least 22 yards, and the bat may be anything, but must be no longer than 33 inches and no wider than 4 inches. You have three attempts. Please do this somewhere safe!"
-    },
-    {
-        "title": "Contribute to the water cycle",
-        "description": "Collect at least a cup of water from a man-made source and pour it into a natural body of water."
+        "description": "Bat a ball. The ball must be thrown from a distance of at least 20 metres, and the bat may be anything, but must be no longer than 80cm and no wider than 10cm. Each teammate has three attempts. Please do this somewhere safe!"
     },
     {
         "title": "Make a daisy chain",
-        "description": "Make a daisy chain necklace and photograph one team member wearing it."
+        "description": "Make a daisy chain necklace and photograph yourself wearing it."
     },
     {
         "title": "Leave a review",
-        "description": "Visit either the highest or lowest rated landmark in the area and leave a review of it on your chosen review site, making at least 2 points with photo evidence."
-    },
-    {
-        "title": "Span an alley",
-        "description": "Find an alley. Touch both walls simultaneously. If you can't do it alone, form a chain."
+        "description": "Visit either the highest or lowest rated landmark in the area and write a review of it, making at least 2 points with photo evidence. You do not need to post the review."
     },
     {
         "title": "Find a feather",
@@ -288,16 +196,8 @@
         "description": "Find either symbolic or photographic pictures of the sun and the moon."
     },
     {
-        "title": "Build an archway",
-        "description": "Build a freestanding archway with a clearance of at least 10cm."
-    },
-    {
         "title": "Follow your destiny",
-        "description": "Generate a random number from 1 to 102 then visit the region with that ID"
-    },
-    {
-        "title": "Float a boat",
-        "description": "Construct a concave boat and place it on the surface of any body of water. It must float for at least 10 seconds."
+        "description": "Generate a random number from 1 to 92 then visit the region with that ID"
     },
     {
         "title": "Lure an opponent",
@@ -308,20 +208,12 @@
         "description": "Split any object into four parts of equal shape and size."
     },
     {
-        "title": "Dust the windows",
-        "description": "Scrub the entire area of every ground-floor window of any buildling."
-    },
-    {
         "title": "Burst a bubble",
         "description": "Find or blow a bubble, and then pop it."
     },
     {
-        "title": "Contact the council",
-        "description": "Call, email, or visit the local council to ask on any matter. You must receive an accurate answer to your query."
-    },
-    {
         "title": "Limbo dilemma",
-        "description": "Make a choice: succeed at a limbo below 2 feet in 5 attempts, 3 feet in 3 attempts, or 4 feet in 1 attempt."
+        "description": "Make a choice: succeed at a limbo below 60cm in 5 attempts, 90cm feet in 3 attempts, or 120cm in 1 attempt."
     },
     {
         "title": "Cartography ",
@@ -329,15 +221,7 @@
     },
     {
         "title": "Make it #aesthetic",
-        "description": "Take a selection of 10 photos of the local area that encapsulate its aesthetic. Upload these photos to social media, with a different filter on each one."
-    },
-    {
-        "title": "Play marbles",
-        "description": "Play marbles on a paved area. You may use any hard balls as marbles."
-    },
-    {
-        "title": "Lost and found",
-        "description": "Leave any possession in this region and get another teammate not currently in this region or any neighbouring regions to retrieve it."
+        "description": "Take a selection of 10 photos of the local area that encapsulate its aesthetic. Then apply a different filter on each one."
     },
     {
         "title": "Draw in detail",
@@ -353,7 +237,7 @@
     },
     {
         "title": "Describe something simply",
-        "description": "One of you must go into a shop or park and describe something you can see with at most ten monosyllabic words. A teammate who is elsewhere must guess what you are describing."
+        "description": "One of you must go into a shop or park and describe something you can see with at most ten monosyllabic words. You may not identify the object directly. A teammate who is elsewhere must guess what you are describing."
     },
     {
         "title": "Take a closer look",
@@ -361,11 +245,11 @@
     },
     {
         "title": "Point north",
-        "description": "Without looking at any digital devices, determine and point in the direction of north."
+        "description": "Without looking at any digital devices, determine and point in the direction of north. You must be within 15 degrees in either direction"
     },
     {
         "title": "Run for it",
-        "description": "Reach any spawn point in 5 minutes"
+        "description": "Reach any spawn point in 5 minutes."
     },
     {
         "title": "Improve an advert",
@@ -376,14 +260,6 @@
         "description": "Go to a bus stop where only one bus will arrive in the next five minutes. Wait for a bus to arrive, and chant \"bus\" when it appears."
     },
     {
-        "title": "Guess everyone's age",
-        "description": "Guess the age of every current player. You must be no more than one year off. You must get at least 80%"
-    },
-    {
-        "title": "Get faster, higher, stronger",
-        "description": "In ten seconds, you must run 50 metres, go over something 1 metre high, and lift a teammate."
-    },
-    {
         "title": "Run a slalom",
         "description": "Place eight objects in a line, at least one metre apart each. Run from one end of the line to the other, alternating the side by which you pass each object. You have five seconds."
     },
@@ -392,16 +268,12 @@
         "description": "Reveal to all players your current location. Do this for the next two regions you enter."
     },
     {
-        "title": "Win today's Wordle",
-        "description": "You must succeed of your own accord."
+        "title": "Win at Wordle",
+        "description": "Solve a Wordle puzzle from https://wordleunlimited.org/. You may only make one attempt per region. You may not complete this challenge more than once."
     },
     {
         "title": "Play a round of hangman",
         "description": "Provide your team with an eight-letter word to guess. They can make at most six mistakes."
-    },
-    {
-        "title": "Re-enact Jet Lag: The Game",
-        "description": "Recreate any minute-long scene from Jet Lag: The Game from memory. You may rehearse, but if you make any mistakes, you must start over."
     },
     {
         "title": "Make eighteen holes in one",
@@ -421,7 +293,7 @@
     },
     {
         "title": "Attempt divination",
-        "description": "Guess which region your team will claim next. You may not inform your teammates of your guess. If you are incorrect, you may not guess the same block again."
+        "description": "Guess which region your team will claim next. You may not inform your teammates of your guess. If you are incorrect, you must change your guess before trying again."
     },
     {
         "title": "Irregulate your breathing",
@@ -440,22 +312,6 @@
         "description": "Predict five coin flips in a row. You may keep flipping until you succeed."
     },
     {
-        "title": "Seduce and debauch an unallied player",
-        "description": "On a two-minute call with any opponent, convince them to either temporarily team up with you, or slander each of their teammates on camera"
-    },
-    {
-        "title": "Adopt a competing standard",
-        "description": "Change your phone's keyboard to a different layout (e.g. Dvorak) and score more than 30wpm in a typing test."
-    },
-    {
-        "title": "Surf the Subway",
-        "description": "Sustain a run of Subway Surfers for 90 seconds"
-    },
-    {
-        "title": "Charity spree",
-        "description": "Give away any two items to any strangers. They must accept your gifts."
-    },
-    {
         "title": "Rebrand your clothing",
         "description": "Create and attach a JL:OX branded tag to an article of clothing. If you ever lose the tag, you must return here to reattach it."
     },
@@ -464,35 +320,71 @@
         "description": "Sit on the ground whilst touching some live grass for at least 30 seconds. You've earned it."
     },
     {
-        "title": "Review in rhymes",
-        "description": "Submit two reviews for adjacent buildings, one with a 1 star rating, the other with a 5 star rating. Each must contain at least 100 words of your honest thoughts. Every sentence of one review must rhyme with a sentence in the other review."
-    },
-    {
         "title": "Experience 3D rotations",
         "description": "Find a cuboidal object and take a photo of every face in four 90 degree rotations. Verify you have all 24 before continuing."
     },
     {
-        "title": "City Pride",
-        "description": "Draw the flag of Oxford as accurately as possible"
-    },
-    {
-        "title": "Big Brother",
-        "description": "Draw a self portrait, write your name underneath, and hide it somewhere in this region with the eyes visible. If an opponent finds it, you are instantly KO'd, no matter where you are."
-    },
-    {
-        "title": "Get in sync with your team",
-        "description": "Complete another teammate's current challenge at the exact same time as them."
-    },
-    {
-        "title": "The Floor is Lava",
-        "description": "Cross the zone without stepping on the ground. Each player gets only one attempt."
-    },
-    {
         "title": "Balancing Act 2",
-        "description": "Walk along the entire length of a kerb. You must start and end at different zone boundaries. If you step off the kerb, start over."
+        "description": "Walk along the entire length of a kerb. You must start and end at different region boundaries. If you step off the kerb, start over."
     },
     {
         "title": "Be at least 12 months old",
-        "description": "Do each of the following: place a smaller thing into a larger container, wave at someone when they leave,  use your thumb and pointer finger to pick up small objects, pull yourself up into a standing position "
+        "description": "Do each of the following: place a smaller thing into a larger container, wave at someone when they leave, use your thumb and pointer finger to pick up small objects, pull yourself up into a standing position"
+    },
+    {
+        "title": "Tongue twisters",
+        "description": "Look up three well-known tongue twisters and say them in quick succession with no mistakes."
+    },
+    {
+        "title": "Learn to juggle",
+        "description": "Hold one object in each hand. Throw one into the air, and as it reaches the top of its arc, throw the second one. Catch the objects in opposite hands."
+    },
+    {
+        "title": "Competitive conversation",
+        "description": "Talk to a stranger and time the length of your conversation. Then, talk to a second stranger for at least 50% longer. Conversations only count if they verbally respond."
+    },
+    {
+        "title": "Try not to Laugh",
+        "description": "Find any video online with \"try not to laugh\" in its title. Watch at least two minutes of it, with sound, continuously, without laughing. If you laugh, you must restart from the beginning of the clip."
+    },
+    {
+        "title": "Jump for it",
+        "description": "Travel at least 50m (total walking distance, not as the crow flies) without taking a step."
+    },
+    {
+        "title": "Spin like a champion",
+        "description": "Create a spinning top which spins continuously for at least 30 seconds without assistance."
+    },
+    {
+        "title": "Report a problem to the council",
+        "description": "Using fixmystreet.com, find an unreported issue and submit a proper report."
+    },
+    {
+        "title": "Bird guide",
+        "description": "Take a continuous video of a bird lasting at least 60 seconds, without it leaving the frame"
+    },
+    {
+        "title": "Parkour",
+        "description": "Make a parkour video at least 30 seconds long, containing at leaast three stunts"
+    },
+    {
+        "title": "Documentary",
+        "description": "Film at 60 second documentary about this region of Oxford, with at least five shots, narration and a hand-drawn title card."
+    },
+    {
+        "title": "Wish you were here",
+        "description": "Draw a postcard for this region of Oxford, spending at least 90 seconds on the drawing and writing at least 50 words on the back to your opponents."
+    },
+    {
+        "title": "Front page",
+        "description": "Write (with a pen and a sheet of A4 paper!) a newspaper front page about this JL:OX event. It should have at least three articles of at least 50 words each, and one illustration."
+    },
+    {
+        "title": "Free advertising",
+        "description": "Find an advertisement and copy its text word for word onto a piece of paper."
+    },
+    {
+        "title": "Balancing act",
+        "description": "Balance on one leg for 90 seconds, touching nothing but the floor."
     }
 ]
