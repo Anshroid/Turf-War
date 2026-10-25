@@ -77,7 +77,12 @@ class TurfWar(GameContext):
     
     async def cycle_announce(self) -> None:
         for view in self.get_challenge_views:
-            await disable_view(view)
+            try:
+                await disable_view(view)
+            except Exception:
+                continue
+            
+        self.get_challenge_views = []
             
         embed, map_png_path = generate_new_map(self)
         if self.thread: await self.thread.send("Challenges have been refreshed! Here is the current state of the map.", embed=embed, file=File(map_png_path, filename="map.png"))
@@ -88,6 +93,8 @@ class TurfWar(GameContext):
             self.logger.info("game is not running, cancelling cycles")
             return
         
+        self.schedule_event(0, CYCLE_INTERVAL_MINUTES, 0, self.end_cycle)
+        
         self.challenge_deck.shuffle(self.rng)
         for region, challenge in zip(self.map.get_regions(), self.challenge_deck.challenges):
             region.locked = False
@@ -97,7 +104,6 @@ class TurfWar(GameContext):
         
         self.cycle += 1
         
-        self.schedule_event(0, CYCLE_INTERVAL_MINUTES, 0, self.end_cycle)
     
     async def win_announce(self) -> None:    
         red = len(self.owned_regions[OwnedBy.RED])

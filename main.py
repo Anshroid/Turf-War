@@ -15,7 +15,7 @@ from views import ClaimView, ChallengeListView
 with open("TOKEN", "r") as f:
     TOKEN = f.read()
 
-bot = JLOXBot(TurfWar, pathlib.Path() / "save", member_hostable=False, joinable=True)
+bot = JLOXBot(TurfWar, pathlib.Path() / "save", member_hostable=False, joinable=False)
 
 @bot.event
 async def on_ready():
