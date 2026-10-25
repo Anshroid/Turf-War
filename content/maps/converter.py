@@ -267,8 +267,8 @@ t.text = "Respawn point"
 key.append(t)
 root.append(key)
 
-# with open("oxford_city_centre/map.json", "w") as f:
-#     json.dump(json_output, f, indent=4)
+with open("out.json", "w") as f:
+    json.dump(json_output, f, indent=4)
 
-with open("oxford_city_centre/map.svg", "w") as f:
+with open("out.svg", "w") as f:
     f.write(str(ElementTree.tostring(svg_data.getroot()), "utf-8"))
